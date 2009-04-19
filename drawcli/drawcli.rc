@@ -26,15 +26,20 @@ LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 // Dialog
 //
 
-IDD_ENTRY_DIALOG DIALOGEX 0, 0, 186, 90
+IDD_ENTRY_DIALOG DIALOGEX 0, 0, 212, 157
 STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "Dialog"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "确定",IDOK,35,60,50,14
-    PUSHBUTTON      "取消",IDCANCEL,94,61,50,14
+    DEFPUSHBUTTON   "确定",IDOK,37,129,50,14
+    PUSHBUTTON      "取消",IDCANCEL,96,129,50,14
     EDITTEXT        IDC_EDIT1,99,23,40,14,ES_AUTOHSCROLL
     LTEXT           "实体名称：",IDC_STATIC,42,24,43,12
+    LISTBOX         IDC_LIST1,121,53,48,59,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO1,19,85,48,30,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT2,20,66,40,14,ES_AUTOHSCROLL
+    LTEXT           "属性名称：",IDC_STATIC,21,52,41,8
+    PUSHBUTTON      "添加属性",IDC_BUTTON1,71,67,41,14
 END
 
 
@@ -49,12 +54,41 @@ BEGIN
     IDD_ENTRY_DIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 179
+        RIGHTMARGIN, 205
         TOPMARGIN, 7
-        BOTTOMMARGIN, 83
+        BOTTOMMARGIN, 150
     END
 END
 #endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_ENTRY_DIALOG DLGINIT
+BEGIN
+    IDC_COMBO1, 0x403, 15, 0
+0xebc7, 0xa1d1, 0xf1d4, 0xf4ca, 0xd4d0, 0xe0c0, 0xcdd0, "\000" 
+    IDC_COMBO1, 0x403, 4, 0
+0x6e69, 0x0074, 
+    IDC_COMBO1, 0x403, 6, 0
+0x6c66, 0x616f, 0x0074, 
+    IDC_COMBO1, 0x403, 7, 0
+0x6f64, 0x6275, 0x656c, "\000" 
+    IDC_COMBO1, 0x403, 5, 0
+0x6863, 0x7261, "\000" 
+    IDC_COMBO1, 0x403, 8, 0
+0x6176, 0x6372, 0x6168, 0x0072, 
+    IDC_COMBO1, 0x403, 5, 0
+0x6164, 0x6574, "\000" 
+    IDC_COMBO1, 0x403, 5, 0
+0x6974, 0x656d, "\000" 
+    IDC_COMBO1, 0x403, 5, 0
+0x6579, 0x7261, "\000" 
+    0
+END
 
 #endif    // 中文(中华人民共和国) resources
 /////////////////////////////////////////////////////////////////////////////

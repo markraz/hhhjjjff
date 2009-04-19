@@ -24,4 +24,6 @@ public:
 
 public:
 	CString entryName;
+public:
+	afx_msg void OnCbnSelchangeCombo1();
 };

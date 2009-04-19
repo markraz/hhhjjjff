@@ -23,7 +23,6 @@
 #define IDC_TITLE                       108
 #define IDC_SUBJECT                     109
 #define IDC_TEMPLATE                    110
-#define IDD_DIALOG1                     110
 #define IDD_ENTRY_DIALOG                110
 #define IDC_SAVEDBY                     111
 #define IDC_REVNUM                      112
@@ -38,6 +37,10 @@
 #define IDC_SECURITY                    122
 #define IDC_THUMBNAIL                   123
 #define IDC_EDIT1                       124
+#define IDC_LIST1                       125
+#define IDC_COMBO1                      126
+#define IDC_EDIT2                       127
+#define IDC_BUTTON1                     128
 #define ID_CANCEL_EDIT                  32768
 #define ID_VIEW_GRID                    32769
 #define ID_DRAW_SELECT                  32770
@@ -66,7 +69,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        111
 #define _APS_NEXT_COMMAND_VALUE         32813
-#define _APS_NEXT_CONTROL_VALUE         125
+#define _APS_NEXT_CONTROL_VALUE         129
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
