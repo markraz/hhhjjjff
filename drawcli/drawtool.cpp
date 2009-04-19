@@ -309,7 +309,7 @@ void CRectTool::OnLButtonDown(CDrawView* pView, UINT nFlags, const CPoint& point
 	CDrawTool::OnLButtonDown(pView, nFlags, point);
 
 	CPoint local;
-	local.SetPoint(point.x-5,point.y-5);//ZDO
+	local.SetPoint(point.x+20,point.y+20);//ZDO
 	pView->ClientToDoc(local);
 
 	CDrawRect* pObj = new CDrawRect(CRect(local, CSize(-50, 50)),(CString)"No Name");//ZDO
