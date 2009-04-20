@@ -21,9 +21,12 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnBnClickedOk();
+	afx_msg void OnBnClickedButton1();
+	afx_msg void OnCbnSelchangeCombo1();
 
 public:
 	CString entryName;
-public:
-	afx_msg void OnCbnSelchangeCombo1();
+	CString attrName;
+	CString attrType;
+	CListBox ourCLBCtrl;
 };
