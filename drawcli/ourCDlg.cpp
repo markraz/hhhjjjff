@@ -59,7 +59,7 @@ void ourCEntryDlg::OnBnClickedOk()
 void ourCEntryDlg::OnBnClickedButton1()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	//ZDO:在listbox中添加属性信息
+	//ZDO:在listbox中添加属性信息 ZTODO：显示效果有待改进
 	UpdateData(TRUE);
 	CString str=attrType;
 	int n=12-attrType.GetLength();
