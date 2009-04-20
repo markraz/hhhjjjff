@@ -395,8 +395,10 @@ void CDrawObj::OnOpen(CDrawObj* pObj)
 	//OnEditProperties();
 	//ZDO
 	ourCEntryDlg dlg;
-	dlg.DoModal();
-	pObj->ourObjName="";
+	dlg.entryName=pObj->ourObjName;
+	if (dlg.DoModal() != IDOK)
+		return;
+	pObj->ourObjName.Empty();
 	pObj->ourObjName+=dlg.entryName;
 	Invalidate();
 	//ZDID
