@@ -97,6 +97,30 @@ void CDrawTool::OnCancel()
 	c_drawShape = selection;
 }
 
+
+//ZDO
+void CDrawTool::ourDrawEllipse(CDrawView* pView,const CPoint& point,const CString &attrNameAndType)
+{
+	COleClientItem* pActiveItem = pView->GetDocument()->GetInPlaceActiveItem(pView);
+	if (pActiveItem != NULL)
+	{
+		pActiveItem->Close();
+		ASSERT(pView->GetDocument()->GetInPlaceActiveItem(pView) == NULL);
+	}
+	//pView->SetCapture();
+	//c_down = point;
+	//c_last = point;
+	CPoint local;
+	local.SetPoint(point.x,point.y);
+	pView->ClientToDoc(local);
+	CDrawRect* pObj = new CDrawRect(CRect(local, CSize(-70, 50)),attrNameAndType);
+	pObj->m_nShape = CDrawRect::ellipse;
+	pView->GetDocument()->Add(pObj);
+	pView->Select(pObj);
+	CDrawTool::c_drawShape = selection;
+
+}
+//ZDID
 ////////////////////////////////////////////////////////////////////////////
 // CResizeTool
 
@@ -190,7 +214,7 @@ void CSelectTool::OnLButtonDblClk(CDrawView* pView, UINT nFlags, const CPoint& p
 			CPoint local = point;
 			pView->ClientToDoc(local);
 			CDrawObj* pObj = pView->GetDocument()->ObjectAt(local);
-			pView->m_selection.GetHead()->OnOpen(pObj);
+			pView->m_selection.GetHead()->OnOpen(pObj,pView);//ZDO
 		}
 	}
 
@@ -363,7 +387,7 @@ void CRectTool::OnLButtonUp(CDrawView* pView, UINT nFlags, const CPoint& point)
 //ZDID
 	selectTool.OnLButtonUp(pView, nFlags, point);
 	CDrawObj *pObj = pView->m_selection.GetTail();//ZDO
-	pView->m_selection.GetHead()->OnOpen(pObj);//ZDO
+	pView->m_selection.GetHead()->OnOpen(pObj,pView);//ZDO
 }
 
 void CRectTool::OnMouseMove(CDrawView* pView, UINT nFlags, const CPoint& point)

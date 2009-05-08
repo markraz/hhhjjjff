@@ -47,6 +47,7 @@ public:
 	void Remove(CDrawObj* pObj);
 	void PasteNative(COleDataObject& dataObject);
 	void PasteEmbedded(COleDataObject& dataObject, CPoint point );
+	//void ourDrawEllipse(const CPoint& point,const CString &attrNameAndType);//ZDO
 
 // Implementation
 protected:

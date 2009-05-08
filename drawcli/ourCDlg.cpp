@@ -39,7 +39,6 @@ void ourCEntryDlg::DoDataExchange(CDataExchange* pDX)
 	CComboBox *pCB=(CComboBox*)GetDlgItem(IDC_COMBO1);//ZDO
 	pCB->SetCurSel(0);//ZDO:SetCurSel函数可改变标签控件当前选定的项目
 
-
 }
 
 
@@ -61,14 +60,8 @@ void ourCEntryDlg::OnBnClickedButton1()
 	// TODO: 在此添加控件通知处理程序代码
 	//ZDO:在listbox中添加属性信息 ZTODO：显示效果有待改进
 	UpdateData(TRUE);
-	CString str=attrType;
-	int n=12-attrType.GetLength();
-	while(n--)
-	{
-		str+=" ";
-	}
-	str+=attrName;
-	//str.Format();
+	CString str=attrName+'('+attrType+')';
 	ourCLBCtrl.AddString(str);
+	CStrLAttr.AddTail(str);
 	//ZDID
 }

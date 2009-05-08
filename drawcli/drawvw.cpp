@@ -1314,3 +1314,26 @@ void CDrawView::OnPrint(CDC* pDC, CPrintInfo* pInfo)
 		((CDrawDoc*)GetDocument())->m_pSummInfo->RecordPrintDate();
 	OnDraw(pDC);
 }
+
+
+//ZDO
+/*void CDrawView::ourDrawEllipse(const CPoint& point,const CString &attrNameAndType)
+{
+	/*COleClientItem* pActiveItem =((GetDocument())->GetInPlaceActiveItem(this));
+	if (pActiveItem != NULL)
+	{
+		pActiveItem->Close();
+		ASSERT(GetDocument()->GetInPlaceActiveItem(this) == NULL);
+	}看来要挪到drawtool里了
+	CPoint local;
+	local.SetPoint(point.x+20,point.y+20);
+	//ClientToDoc(local);
+	CDrawRect* pObj = new CDrawRect(CRect(local, CSize(-50, 50)),attrNameAndType);
+	pObj->m_nShape = CDrawRect::ellipse;
+	((CDrawDoc*)m_pDocument)->Add(pObj);
+	//Select(pObj);
+	CDrawTool::c_drawShape = selection;
+	CDrawTool::ourDrawEllipse(this,point,attrNameAndType);
+//让entry对话框调用此函数
+}*/
+//ZDID
