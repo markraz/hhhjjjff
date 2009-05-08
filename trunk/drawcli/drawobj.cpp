@@ -12,10 +12,11 @@
 
 #include "stdafx.h"
 #include "drawcli.h"
-
+#include "drawtool.h"
 #include "drawdoc.h"
 #include "drawvw.h"
 #include "drawobj.h"
+#include "mainfrm.h"
 
 #include "cntritem.h"
 #include "rectdlg.h"
@@ -357,6 +358,7 @@ CDrawObj* CDrawObj::Clone(CDrawDoc* pDoc)
 	pClone->m_logpen = m_logpen;
 	pClone->m_bBrush = m_bBrush;
 	pClone->m_logbrush = m_logbrush;
+	pClone->ourObjName += ourObjName;//ZDO
 	ASSERT_VALID(pClone);
 
 	if (pDoc != NULL)
@@ -390,7 +392,7 @@ void CDrawObj::OnEditProperties()
 	m_pDocument->SetModifiedFlag();
 }
 
-void CDrawObj::OnOpen(CDrawObj* pObj)
+void CDrawObj::OnOpen(CDrawObj* pObj, CDrawView* pView)
 {
 	//OnEditProperties();
 	//ZDO
@@ -400,6 +402,20 @@ void CDrawObj::OnOpen(CDrawObj* pObj)
 		return;
 	pObj->ourObjName.Empty();
 	pObj->ourObjName+=dlg.entryName;
+	CString attr;
+	CPoint local,tempPoint;
+	POSITION pos=dlg.CStrLAttr.GetHeadPosition();
+	int i=0;
+	while (pos != NULL)
+	{
+		attr=dlg.CStrLAttr.GetNext(pos);
+		tempPoint=pObj->m_position.BottomRight();
+		local.SetPoint(tempPoint.x,tempPoint.y-i*30);
+		pView->DocToClient(local);
+		CDrawTool::ourDrawEllipse(pView,local,attr);
+		i++;
+	}
+
 	Invalidate();
 	//ZDID
 }
@@ -694,13 +710,14 @@ CDrawObj* CDrawRect::Clone(CDrawDoc* pDoc)
 {
 	ASSERT_VALID(this);
 
-	CDrawRect* pClone = new CDrawRect(m_position,ourObjName);
+	CDrawRect* pClone = new CDrawRect(m_position,ourObjName);//ZDO
 	pClone->m_bPen = m_bPen;
 	pClone->m_logpen = m_logpen;
 	pClone->m_bBrush = m_bBrush;
 	pClone->m_logbrush = m_logbrush;
 	pClone->m_nShape = m_nShape;
 	pClone->m_roundness = m_roundness;
+	pClone->ourObjName += ourObjName;//ZDO
 	ASSERT_VALID(pClone);
 
 	if (pDoc != NULL)
@@ -872,6 +889,7 @@ CDrawObj* CDrawPoly::Clone(CDrawDoc* pDoc)
 	pClone->m_logpen = m_logpen;
 	pClone->m_bBrush = m_bBrush;
 	pClone->m_logbrush = m_logbrush;
+	pClone->ourObjName += ourObjName;//ZDO
 	pClone->m_points = new CPoint[m_nAllocPoints];
 	
 	memcpy_s(pClone->m_points, sizeof(CPoint) * m_nAllocPoints, m_points, sizeof(CPoint) * m_nPoints);
@@ -966,7 +984,7 @@ CDrawOleObj::CDrawOleObj() : m_extent(0,0)
 }
 
 CDrawOleObj::CDrawOleObj(const CRect& position)
-	: CDrawObj(position,(CString)"zankong"), m_extent(0, 0)//ZDO
+	: CDrawObj(position,(CString)"Unnamed"), m_extent(0, 0)//ZDO
 {
 	m_pClientItem = NULL;
 }
@@ -1034,6 +1052,7 @@ CDrawObj* CDrawOleObj::Clone(CDrawDoc* pDoc)
 		pClone->m_logpen = m_logpen;
 		pClone->m_bBrush = m_bBrush;
 		pClone->m_logbrush = m_logbrush;
+		pClone->ourObjName += ourObjName;//ZDO
 		ASSERT_VALID(pClone);
 
 		if (pDoc != NULL)

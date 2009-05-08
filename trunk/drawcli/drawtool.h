@@ -50,6 +50,8 @@ public:
 	static UINT c_nDownFlags;
 	static CPoint c_last;
 	static DrawShape c_drawShape;
+
+	static void ourDrawEllipse(CDrawView* pView, const CPoint& point, const CString &attrNameAndType);//ZDO
 };
 
 class CSelectTool : public CDrawTool

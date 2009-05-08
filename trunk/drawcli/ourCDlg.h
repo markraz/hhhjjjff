@@ -29,4 +29,5 @@ public:
 	CString attrName;
 	CString attrType;
 	CListBox ourCLBCtrl;
+	CStringList CStrLAttr;
 };

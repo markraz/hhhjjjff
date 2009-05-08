@@ -49,11 +49,12 @@ public:
 	virtual int HitTest(CPoint point, CDrawView* pView, BOOL bSelected);
 	virtual BOOL Intersects(const CRect& rect);
 	virtual void MoveHandleTo(int nHandle, CPoint point, CDrawView* pView = NULL);
-	virtual void OnOpen(CDrawObj* pObj);
+	virtual void OnOpen(CDrawObj* pObj, CDrawView* pView = NULL);
 	virtual void OnEditProperties();
 	virtual CDrawObj* Clone(CDrawDoc* pDoc = NULL);
 	virtual void Remove();
 	void Invalidate();
+
 
 // Implementation
 public:
@@ -103,6 +104,7 @@ protected:
 	CPoint m_roundness; // for roundRect corners
 
 	friend class CRectTool;
+	friend class CDrawTool;//ZDO
 };
 
 /////////////////////////////////////////////////////////////////////////////
