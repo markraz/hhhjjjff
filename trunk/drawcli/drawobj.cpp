@@ -59,6 +59,8 @@ void CDrawObj::Serialize(CArchive& ar)
 		ar << (WORD)m_bPen;
 		ar.Write(&m_logpen, sizeof(LOGPEN));
 		ar << (WORD)m_bBrush;
+		ar << ourObjName;//ZDO
+		CStrLAttr.Serialize(ar);
 		ar.Write(&m_logbrush, sizeof(LOGBRUSH));
 	}
 	else
@@ -73,6 +75,8 @@ void CDrawObj::Serialize(CArchive& ar)
 		ar >> wTemp; m_bPen = (BOOL)wTemp;
 		ar.Read(&m_logpen,sizeof(LOGPEN));
 		ar >> wTemp; m_bBrush = (BOOL)wTemp;
+		ar >> ourObjName;//ZDO
+		CStrLAttr.Serialize(ar);
 		ar.Read(&m_logbrush, sizeof(LOGBRUSH));
 	}
 }
@@ -397,23 +401,32 @@ void CDrawObj::OnOpen(CDrawObj* pObj, CDrawView* pView)
 	//OnEditProperties();
 	//ZDO
 	ourCEntryDlg dlg;
-	dlg.entryName=pObj->ourObjName;
+	POSITION pos;
+	CString attr;
+	dlg.entryName = pObj->ourObjName;
+	pos = pObj->CStrLAttr.GetHeadPosition();
+	int offset=0;
+	while (pos != NULL)
+	{
+		attr=pObj->CStrLAttr.GetNext(pos);
+		dlg.oldCStrLAttr.AddTail(attr);
+		offset++;
+	}
 	if (dlg.DoModal() != IDOK)
 		return;
 	pObj->ourObjName.Empty();
 	pObj->ourObjName+=dlg.entryName;
-	CString attr;
 	CPoint local,tempPoint;
-	POSITION pos=dlg.CStrLAttr.GetHeadPosition();
-	int i=0;
+	pos = dlg.CStrLAttr.GetHeadPosition();
 	while (pos != NULL)
 	{
 		attr=dlg.CStrLAttr.GetNext(pos);
+		pObj->CStrLAttr.AddTail(attr);
 		tempPoint=pObj->m_position.BottomRight();
-		local.SetPoint(tempPoint.x,tempPoint.y-i*30);
+		local.SetPoint(tempPoint.x,tempPoint.y-offset*30);
 		pView->DocToClient(local);
 		CDrawTool::ourDrawEllipse(pView,local,attr);
-		i++;
+		offset++;
 	}
 
 	Invalidate();
