@@ -33,6 +33,7 @@ public:
 	CRect m_position;
 	CDrawDoc* m_pDocument;
 	CString ourObjName;//ZDO
+	CStringList CStrLAttr;//ZDO
 
 	virtual int GetHandleCount();
 	virtual CPoint GetHandle(int nHandle);

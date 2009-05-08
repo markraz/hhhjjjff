@@ -39,6 +39,17 @@ void ourCEntryDlg::DoDataExchange(CDataExchange* pDX)
 	CComboBox *pCB=(CComboBox*)GetDlgItem(IDC_COMBO1);//ZDO
 	pCB->SetCurSel(0);//ZDO:SetCurSel函数可改变标签控件当前选定的项目
 
+
+
+		CString attr;
+		POSITION pos=oldCStrLAttr.GetHeadPosition();
+		while (pos != NULL)
+		{
+			attr=oldCStrLAttr.GetNext(pos);
+			ourCLBCtrl.AddString(attr);
+		}
+		oldCStrLAttr.RemoveAll();
+
 }
 
 

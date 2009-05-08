@@ -30,4 +30,5 @@ public:
 	CString attrType;
 	CListBox ourCLBCtrl;
 	CStringList CStrLAttr;
+	CStringList oldCStrLAttr;
 };
