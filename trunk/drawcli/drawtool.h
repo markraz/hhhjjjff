@@ -51,7 +51,7 @@ public:
 	static CPoint c_last;
 	static DrawShape c_drawShape;
 
-	static void ourDrawEllipse(CDrawView* pView, const CPoint& point, const CString &attrNameAndType);//ZDO
+	static void ourDrawAttri(CDrawView* pView, const CPoint& point,const CPoint& centre, const CString &attrName);//ZDO
 };
 
 class CSelectTool : public CDrawTool

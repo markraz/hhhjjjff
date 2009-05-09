@@ -60,7 +60,7 @@ void CDrawObj::Serialize(CArchive& ar)
 		ar.Write(&m_logpen, sizeof(LOGPEN));
 		ar << (WORD)m_bBrush;
 		ar << ourObjName;//ZDO
-		CStrLAttr.Serialize(ar);
+		CStrLAttr.Serialize(ar);//ZDO
 		ar.Write(&m_logbrush, sizeof(LOGBRUSH));
 	}
 	else
@@ -76,7 +76,7 @@ void CDrawObj::Serialize(CArchive& ar)
 		ar.Read(&m_logpen,sizeof(LOGPEN));
 		ar >> wTemp; m_bBrush = (BOOL)wTemp;
 		ar >> ourObjName;//ZDO
-		CStrLAttr.Serialize(ar);
+		CStrLAttr.Serialize(ar);//ZDO
 		ar.Read(&m_logbrush, sizeof(LOGBRUSH));
 	}
 }
@@ -416,16 +416,20 @@ void CDrawObj::OnOpen(CDrawObj* pObj, CDrawView* pView)
 		return;
 	pObj->ourObjName.Empty();
 	pObj->ourObjName+=dlg.entryName;
-	CPoint local,tempPoint;
+	CPoint local,tempPoint,centre;
+	centre.SetPoint(pObj->m_position.right,pObj->m_position.CenterPoint().y);
 	pos = dlg.CStrLAttr.GetHeadPosition();
+	int iIndex;
 	while (pos != NULL)
 	{
 		attr=dlg.CStrLAttr.GetNext(pos);
 		pObj->CStrLAttr.AddTail(attr);
+		iIndex=attr.Find("(");
+		attr.Delete(iIndex,attr.GetLength());
 		tempPoint=pObj->m_position.BottomRight();
 		local.SetPoint(tempPoint.x,tempPoint.y-offset*30);
-		pView->DocToClient(local);
-		CDrawTool::ourDrawEllipse(pView,local,attr);
+		//pView->DocToClient(local);
+		CDrawTool::ourDrawAttri(pView, local, centre, attr);
 		offset++;
 	}
 
@@ -520,19 +524,23 @@ void CDrawRect::Draw(CDC* pDC)
 	else
 		pOldPen = (CPen*)pDC->SelectStockObject(NULL_PEN);
 
+	CString strToShow;//ZDO
 	CRect rect = m_position;
 	switch (m_nShape)
 	{
 	case rectangle:
 		pDC->Rectangle(rect);
+		strToShow = ourObjName;//ZDO
 		break;
 
 	case roundRectangle:
 		pDC->RoundRect(rect, m_roundness);
+		strToShow = ourObjName;//ZDO
 		break;
 
 	case ellipse:
 		pDC->Ellipse(rect);
+		strToShow = ourObjName;//ZDO
 		break;
 
 	case line:
@@ -560,13 +568,14 @@ void CDrawRect::Draw(CDC* pDC)
 
 		pDC->MoveTo(rect.TopLeft());
 		pDC->LineTo(rect.BottomRight());
+		strToShow = ourObjName;//ZDO
 		break;
 	}
 
 	pDC->SelectObject(pOldBrush);
 	pDC->SelectObject(pOldPen);
 
-	pDC->TextOut(rect.right+5,rect.CenterPoint().y+10,ourObjName);//ZDO
+	pDC->TextOut(rect.right+5,rect.CenterPoint().y+10,strToShow);//ZDO
 }
 
 
