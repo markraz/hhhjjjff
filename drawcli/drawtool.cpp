@@ -99,7 +99,8 @@ void CDrawTool::OnCancel()
 
 
 //ZDO
-void CDrawTool::ourDrawEllipse(CDrawView* pView,const CPoint& point,const CString &attrNameAndType)
+
+void CDrawTool::ourDrawAttri(CDrawView* pView, const CPoint& point,const CPoint& centre, const CString &attrName)
 {
 	COleClientItem* pActiveItem = pView->GetDocument()->GetInPlaceActiveItem(pView);
 	if (pActiveItem != NULL)
@@ -112,8 +113,13 @@ void CDrawTool::ourDrawEllipse(CDrawView* pView,const CPoint& point,const CStrin
 	//c_last = point;
 	CPoint local;
 	local.SetPoint(point.x,point.y);
-	pView->ClientToDoc(local);
-	CDrawRect* pObj = new CDrawRect(CRect(local, CSize(-70, 50)),attrNameAndType);
+	//pView->ClientToDoc(local);
+	local.Offset(-20,20);
+	CDrawRect* pObj =  new CDrawRect(CRect(local, centre),(CString)"");
+	pObj->m_nShape = CDrawRect::line;
+	pView->GetDocument()->Add(pObj);
+	local.Offset(20,-20);
+	pObj =new CDrawRect(CRect(local, CSize(-70, 50)),attrName);
 	pObj->m_nShape = CDrawRect::ellipse;
 	pView->GetDocument()->Add(pObj);
 	pView->Select(pObj);
