@@ -15,6 +15,7 @@
 
 class CDrawView;
 class CDrawDoc;
+class CDrawRect;
 
 /////////////////////////////////////////////////////////////////////////////
 // CDrawObj - base class for all 'drawable objects'
@@ -50,7 +51,7 @@ public:
 	virtual int HitTest(CPoint point, CDrawView* pView, BOOL bSelected);
 	virtual BOOL Intersects(const CRect& rect);
 	virtual void MoveHandleTo(int nHandle, CPoint point, CDrawView* pView = NULL);
-	virtual void OnOpen(CDrawObj* pObj, CDrawView* pView = NULL);
+	virtual void OnOpen(CDrawRect* pObj, CDrawView* pView = NULL);
 	virtual void OnEditProperties();
 	virtual CDrawObj* Clone(CDrawDoc* pDoc = NULL);
 	virtual void Remove();
@@ -99,8 +100,9 @@ public:
 	virtual BOOL Intersects(const CRect& rect);
 	virtual CDrawObj* Clone(CDrawDoc* pDoc);
 
+
 protected:
-	enum Shape { rectangle, roundRectangle, ellipse, line };
+	enum Shape { rectangle, diamond, ellipse, line };
 	Shape m_nShape;
 	CPoint m_roundness; // for roundRect corners
 

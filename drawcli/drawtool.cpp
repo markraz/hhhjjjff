@@ -25,7 +25,7 @@ CPtrList CDrawTool::c_tools;
 static CSelectTool selectTool;
 static CRectTool lineTool(line);
 static CRectTool rectTool(rect);
-static CRectTool roundRectTool(roundRect);
+static CRectTool roundRectTool(diamond);
 static CRectTool ellipseTool(ellipse);
 static CPolyTool polyTool;
 
@@ -119,7 +119,7 @@ void CDrawTool::ourDrawAttri(CDrawView* pView, const CPoint& point,const CPoint&
 	pObj->m_nShape = CDrawRect::line;
 	pView->GetDocument()->Add(pObj);
 	local.Offset(20,-20);
-	pObj =new CDrawRect(CRect(local, CSize(-70, 50)),attrName);
+	pObj =new CDrawRect(CRect(local, CSize(-60, 40)),attrName);
 	pObj->m_nShape = CDrawRect::ellipse;
 	pView->GetDocument()->Add(pObj);
 	pView->Select(pObj);
@@ -219,7 +219,7 @@ void CSelectTool::OnLButtonDblClk(CDrawView* pView, UINT nFlags, const CPoint& p
 		{
 			CPoint local = point;
 			pView->ClientToDoc(local);
-			CDrawObj* pObj = pView->GetDocument()->ObjectAt(local);
+			CDrawRect *pObj = (CDrawRect*)pView->GetDocument()->ObjectAt(local);
 			pView->m_selection.GetHead()->OnOpen(pObj,pView);//ZDO
 		}
 	}
@@ -341,8 +341,13 @@ void CRectTool::OnLButtonDown(CDrawView* pView, UINT nFlags, const CPoint& point
 	CPoint local;
 	local.SetPoint(point.x+20,point.y+20);//ZDO
 	pView->ClientToDoc(local);
-
-	CDrawRect* pObj = new CDrawRect(CRect(local, CSize(-50, 50)),(CString)"Unnamed");//ZDO
+	int sizeX=-50,sizeY=50;
+	if(m_drawShape==diamond)
+	{
+		sizeX=-90;
+		sizeY=40;
+	}
+	CDrawRect* pObj = new CDrawRect(CRect(local, CSize(sizeX, sizeY)),(CString)"Unnamed");//ZDO
 	switch (m_drawShape)
 	{
 	default:
@@ -352,8 +357,8 @@ void CRectTool::OnLButtonDown(CDrawView* pView, UINT nFlags, const CPoint& point
 		pObj->m_nShape = CDrawRect::rectangle;
 		break;
 
-	case roundRect:
-		pObj->m_nShape = CDrawRect::roundRectangle;
+	case diamond:
+		pObj->m_nShape = CDrawRect::diamond;
 		break;
 
 	case ellipse:
@@ -392,8 +397,8 @@ void CRectTool::OnLButtonUp(CDrawView* pView, UINT nFlags, const CPoint& point)
 
 //ZDID
 	selectTool.OnLButtonUp(pView, nFlags, point);
-	CDrawObj *pObj = pView->m_selection.GetTail();//ZDO
-	pView->m_selection.GetHead()->OnOpen(pObj,pView);//ZDO
+	CDrawRect *pObj = (CDrawRect *)pView->m_selection.GetTail();//ZDO
+	pView->m_selection.GetTail()->OnOpen(pObj,pView);//ZDO
 }
 
 void CRectTool::OnMouseMove(CDrawView* pView, UINT nFlags, const CPoint& point)

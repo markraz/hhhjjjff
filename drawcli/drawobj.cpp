@@ -396,7 +396,7 @@ void CDrawObj::OnEditProperties()
 	m_pDocument->SetModifiedFlag();
 }
 
-void CDrawObj::OnOpen(CDrawObj* pObj, CDrawView* pView)
+void CDrawObj::OnOpen(CDrawRect* pObj, CDrawView* pView)
 {
 	//OnEditProperties();
 	//ZDO
@@ -427,7 +427,7 @@ void CDrawObj::OnOpen(CDrawObj* pObj, CDrawView* pView)
 		iIndex=attr.Find("(");
 		attr.Delete(iIndex,attr.GetLength());
 		tempPoint=pObj->m_position.BottomRight();
-		local.SetPoint(tempPoint.x,tempPoint.y-offset*30);
+		local.SetPoint(tempPoint.x-20,tempPoint.y-offset*30);
 		//pView->DocToClient(local);
 		CDrawTool::ourDrawAttri(pView, local, centre, attr);
 		offset++;
@@ -499,7 +499,25 @@ void CDrawRect::Serialize(CArchive& ar)
 		ar >> m_roundness;
 	}
 }
-
+//MDO:»­ÁâÐÎ
+void ourDiamond(const CRect& rect,CDC* pDC)
+{
+	POINT  point_up,point_down,point_right,point_left;
+	point_up.x=(rect.left+rect.right)/2;
+	point_up.y=rect.top;
+	point_down.x=(rect.left+rect.right)/2;
+	point_down.y=rect.bottom;
+	point_right.x=rect.right;
+	point_right.y=(rect.bottom+rect.top)/2;
+	point_left.x=rect.left;
+	point_left.y=(rect.bottom+rect.top)/2;
+	pDC->MoveTo(point_right);
+	pDC->LineTo(point_down);
+	pDC->LineTo(point_left);
+	pDC->LineTo(point_up); 
+	pDC->LineTo(point_right);
+}
+//MDID
 void CDrawRect::Draw(CDC* pDC)
 {
 	ASSERT_VALID(this);
@@ -533,8 +551,8 @@ void CDrawRect::Draw(CDC* pDC)
 		strToShow = ourObjName;//ZDO
 		break;
 
-	case roundRectangle:
-		pDC->RoundRect(rect, m_roundness);
+	case diamond:
+		ourDiamond(rect,pDC);
 		strToShow = ourObjName;//ZDO
 		break;
 
@@ -584,7 +602,7 @@ int CDrawRect::GetHandleCount()
 	ASSERT_VALID(this);
 
 	return m_nShape == line ? 2 :
-		CDrawObj::GetHandleCount() + (m_nShape == roundRectangle);
+		CDrawObj::GetHandleCount() + (m_nShape == diamond);
 }
 
 // returns center of handle in logical coordinates
@@ -594,7 +612,7 @@ CPoint CDrawRect::GetHandle(int nHandle)
 
 	if (m_nShape == line && nHandle == 2)
 		nHandle = 5;
-	else if (m_nShape == roundRectangle && nHandle == 9)
+	else if (m_nShape == diamond && nHandle == 9)
 	{
 		CRect rect = m_position;
 		rect.NormalizeRect();
@@ -613,7 +631,7 @@ HCURSOR CDrawRect::GetHandleCursor(int nHandle)
 
 	if (m_nShape == line && nHandle == 2)
 		nHandle = 5;
-	else if (m_nShape == roundRectangle && nHandle == 9)
+	else if (m_nShape == diamond && nHandle == 9)
 		return AfxGetApp()->LoadStandardCursor(IDC_SIZEALL);
 	return CDrawObj::GetHandleCursor(nHandle);
 }
@@ -625,7 +643,7 @@ void CDrawRect::MoveHandleTo(int nHandle, CPoint point, CDrawView* pView)
 
 	if (m_nShape == line && nHandle == 2)
 		nHandle = 5;
-	else if (m_nShape == roundRectangle && nHandle == 9)
+	else if (m_nShape == diamond && nHandle == 9)
 	{
 		CRect rect = m_position;
 		rect.NormalizeRect();
@@ -669,7 +687,7 @@ BOOL CDrawRect::Intersects(const CRect& rect)
 	case rectangle:
 		return TRUE;
 
-	case roundRectangle:
+	case diamond:
 		rgn.CreateRoundRectRgn(fixed.left, fixed.top, fixed.right, fixed.bottom,
 			m_roundness.x, m_roundness.y);
 		break;
