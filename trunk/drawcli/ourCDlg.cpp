@@ -76,3 +76,33 @@ void ourCEntryDlg::OnBnClickedButton1()
 	CStrLAttr.AddTail(str);
 	//ZDID
 }
+// E:\Visual Studio 2005\Projects\bb\drawcli\ourCDlg.cpp : 实现文件
+//
+
+
+
+// ourCRelationDlg 对话框
+
+IMPLEMENT_DYNAMIC(ourCRelationDlg, CDialog)
+
+ourCRelationDlg::ourCRelationDlg(CWnd* pParent /*=NULL*/)
+	: CDialog(ourCRelationDlg::IDD, pParent)
+{
+
+}
+
+ourCRelationDlg::~ourCRelationDlg()
+{
+}
+
+void ourCRelationDlg::DoDataExchange(CDataExchange* pDX)
+{
+	CDialog::DoDataExchange(pDX);
+}
+
+
+BEGIN_MESSAGE_MAP(ourCRelationDlg, CDialog)
+END_MESSAGE_MAP()
+
+
+// ourCRelationDlg 消息处理程序

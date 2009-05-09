@@ -765,7 +765,7 @@ void CDrawView::OnDrawSelect()
 
 void CDrawView::OnDrawRoundRect()
 {
-	CDrawTool::c_drawShape = roundRect;
+	CDrawTool::c_drawShape = diamond;
 }
 
 void CDrawView::OnDrawRect()
@@ -805,7 +805,7 @@ void CDrawView::OnUpdateDrawRect(CCmdUI* pCmdUI)
 
 void CDrawView::OnUpdateDrawRoundRect(CCmdUI* pCmdUI)
 {
-	pCmdUI->SetRadio(CDrawTool::c_drawShape == roundRect);
+	pCmdUI->SetRadio(CDrawTool::c_drawShape == diamond);
 }
 
 void CDrawView::OnUpdateDrawSelect(CCmdUI* pCmdUI)

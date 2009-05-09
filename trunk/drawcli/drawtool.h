@@ -22,7 +22,7 @@ enum DrawShape
 	selection,
 	line,
 	rect,
-	roundRect,
+	diamond,
 	ellipse,
 	poly
 };
