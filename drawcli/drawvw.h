@@ -162,6 +162,9 @@ protected:
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
+
+
+	friend class CDrawTool;//ZDO
 };
 
 /////////////////////////////////////////////////////////////////////////////

@@ -20,7 +20,7 @@
 
 #include "cntritem.h"
 #include "rectdlg.h"
-#include "ourCDlg.h"
+
 
 IMPLEMENT_SERIAL(CDrawObj, CObject, 0)
 
@@ -396,45 +396,9 @@ void CDrawObj::OnEditProperties()
 	m_pDocument->SetModifiedFlag();
 }
 
-void CDrawObj::OnOpen(CDrawRect* pObj, CDrawView* pView)
+void CDrawObj::OnOpen(CDrawView* /*pView*/)
 {
 	//OnEditProperties();
-	//ZDO
-	ourCEntryDlg dlg;
-	POSITION pos;
-	CString attr;
-	dlg.entryName = pObj->ourObjName;
-	pos = pObj->CStrLAttr.GetHeadPosition();
-	int offset=0;
-	while (pos != NULL)
-	{
-		attr=pObj->CStrLAttr.GetNext(pos);
-		dlg.oldCStrLAttr.AddTail(attr);
-		offset++;
-	}
-	if (dlg.DoModal() != IDOK)
-		return;
-	pObj->ourObjName.Empty();
-	pObj->ourObjName+=dlg.entryName;
-	CPoint local,tempPoint,centre;
-	centre.SetPoint(pObj->m_position.right,pObj->m_position.CenterPoint().y);
-	pos = dlg.CStrLAttr.GetHeadPosition();
-	int iIndex;
-	while (pos != NULL)
-	{
-		attr=dlg.CStrLAttr.GetNext(pos);
-		pObj->CStrLAttr.AddTail(attr);
-		iIndex=attr.Find("(");
-		attr.Delete(iIndex,attr.GetLength());
-		tempPoint=pObj->m_position.BottomRight();
-		local.SetPoint(tempPoint.x-20,tempPoint.y-offset*30);
-		//pView->DocToClient(local);
-		CDrawTool::ourDrawAttri(pView, local, centre, attr);
-		offset++;
-	}
-
-	Invalidate();
-	//ZDID
 }
 
 void CDrawObj::SetLineColor(COLORREF color)
@@ -499,6 +463,115 @@ void CDrawRect::Serialize(CArchive& ar)
 		ar >> m_roundness;
 	}
 }
+//ZDO
+//void CDrawRect::OnEditProperties(ourCEntryDlg &dlg, CDrawView* pView)
+//{
+//
+//}
+void CDrawRect::OnOpen(CDrawView* pView)
+{
+	if(this->m_nShape==diamond)
+	{
+		ourCRelationDlg *pDlg;
+		pDlg =new ourCRelationDlg();
+		POSITION pos;
+////////////////////////////////////////
+		CDrawObjList *objList = pView->GetDocument()->GetObjects();
+		pos = objList->GetHeadPosition();
+		CDrawRect *pRect;
+		while (pos != NULL)
+		{
+			pRect=(CDrawRect*)objList->GetNext(pos);
+			if(pRect->m_nShape==rectangle)
+			{
+				pDlg->CStrLEntry.AddTail(pRect->ourObjName);
+				pDlg->CPtrLEntry.AddTail(pRect);
+			}
+		}
+///////////////////////////////////////
+		CString attr;
+		pDlg->relationName = this->ourObjName;
+		pos = this->CStrLAttr.GetHeadPosition();
+		int offset=0;
+		while (pos != NULL)
+		{
+			attr=this->CStrLAttr.GetNext(pos);
+			pDlg->oldCStrLAttr.AddTail(attr);
+			offset++;
+		}
+		if (pDlg->DoModal() != IDOK)
+			return;
+		this->ourObjName.Empty();
+		this->ourObjName+=pDlg->relationName;
+		CPoint local,tempPoint,centre;
+		centre.SetPoint(this->m_position.right,this->m_position.CenterPoint().y);
+		pos = pDlg->CStrLAttr.GetHeadPosition();
+		int iIndex;
+		while (pos != NULL)
+		{
+			attr=pDlg->CStrLAttr.GetNext(pos);
+			this->CStrLAttr.AddTail(attr);
+			iIndex=attr.Find("(");
+			attr.Delete(iIndex,attr.GetLength());
+			tempPoint=this->m_position.BottomRight();
+			local.SetPoint(tempPoint.x-20,tempPoint.y-offset*30);
+			//pView->DocToClient(local);
+			CDrawTool::ourDrawAttri(pView, local, centre, attr);
+			offset++;
+		}
+		//画直线 
+		实体用prtlist  关系用两个drawrect*
+		centre=this->m_position.CenterPoint();
+		CPoint entryPoint=pDlg->pRectLeft->m_position.CenterPoint();
+		CDrawTool::ourDrawRelation(pView,entryPoint,centre,(CString)"");
+		entryPoint=pDlg->pRectRight->m_position.CenterPoint();
+		CDrawTool::ourDrawRelation(pView,entryPoint,centre,(CString)"");
+		
+		
+		Invalidate();
+		delete pDlg;
+	}
+	else if(this->m_nShape==rectangle)
+	{
+		ourCEntryDlg *pDlg;
+		pDlg =new ourCEntryDlg();
+		POSITION pos;
+		CString attr;
+		pDlg->entryName = this->ourObjName;
+		pos = this->CStrLAttr.GetHeadPosition();
+		int offset=0;
+		while (pos != NULL)
+		{
+			attr=this->CStrLAttr.GetNext(pos);
+			pDlg->oldCStrLAttr.AddTail(attr);
+			offset++;
+		}
+		if (pDlg->DoModal() != IDOK)
+			return;
+		this->ourObjName.Empty();
+		this->ourObjName+=pDlg->entryName;
+		CPoint local,tempPoint,centre;
+		centre.SetPoint(this->m_position.right,this->m_position.CenterPoint().y);
+		pos = pDlg->CStrLAttr.GetHeadPosition();
+		int iIndex;
+		while (pos != NULL)
+		{
+			attr=pDlg->CStrLAttr.GetNext(pos);
+			this->CStrLAttr.AddTail(attr);
+			iIndex=attr.Find("(");
+			attr.Delete(iIndex,attr.GetLength());
+			tempPoint=this->m_position.BottomRight();
+			local.SetPoint(tempPoint.x-20,tempPoint.y-offset*30);
+			//pView->DocToClient(local);
+			CDrawTool::ourDrawAttri(pView, local, centre, attr);
+			offset++;
+		}
+
+		Invalidate();
+		delete pDlg;
+	}
+}
+//ZDID
 //MDO:画菱形
 void ourDiamond(const CRect& rect,CDC* pDC)
 {

@@ -13,9 +13,11 @@
 #ifndef __DRAWOBJ_H__
 #define __DRAWOBJ_H__
 
+#include "ourCDlg.h"
+
 class CDrawView;
 class CDrawDoc;
-class CDrawRect;
+//class CDrawRect;
 
 /////////////////////////////////////////////////////////////////////////////
 // CDrawObj - base class for all 'drawable objects'
@@ -51,7 +53,7 @@ public:
 	virtual int HitTest(CPoint point, CDrawView* pView, BOOL bSelected);
 	virtual BOOL Intersects(const CRect& rect);
 	virtual void MoveHandleTo(int nHandle, CPoint point, CDrawView* pView = NULL);
-	virtual void OnOpen(CDrawRect* pObj, CDrawView* pView = NULL);
+	virtual void OnOpen(CDrawView* pView = NULL);
 	virtual void OnEditProperties();
 	virtual CDrawObj* Clone(CDrawDoc* pDoc = NULL);
 	virtual void Remove();
@@ -99,6 +101,8 @@ public:
 	virtual void MoveHandleTo(int nHandle, CPoint point, CDrawView* pView = NULL);
 	virtual BOOL Intersects(const CRect& rect);
 	virtual CDrawObj* Clone(CDrawDoc* pDoc);
+	virtual void OnOpen(CDrawView* pView = NULL);
+	//virtual void OnEditProperties(ourCEntryDlg &dlg, CDrawView* pView = NULL);
 
 
 protected:
