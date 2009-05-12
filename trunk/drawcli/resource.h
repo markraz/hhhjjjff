@@ -25,8 +25,8 @@
 #define IDC_TEMPLATE                    110
 #define IDD_ENTRY_DIALOG                110
 #define IDC_SAVEDBY                     111
-#define IDD_ENTRY_DIALOG1               111
 #define IDD_RELATION_DIALOG1            111
+#define IDD_RELATION_DIALOG             111
 #define IDC_REVNUM                      112
 #define IDC_EDITTIME                    113
 #define IDC_LASTPRINT                   114
