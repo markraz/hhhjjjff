@@ -104,6 +104,9 @@ public:
 	virtual void OnOpen(CDrawView* pView = NULL);
 	//virtual void OnEditProperties(ourCEntryDlg &dlg, CDrawView* pView = NULL);
 
+	CDrawObjList myRelation;//ZDO for entry
+	CDrawRect *relationToEntry[2];//ZDO for relationship
+	CString* ourCreateTable();
 
 protected:
 	enum Shape { rectangle, diamond, ellipse, line };

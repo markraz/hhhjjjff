@@ -91,6 +91,8 @@ BEGIN_MESSAGE_MAP(CDrawView, CScrollView)
 	ON_UPDATE_COMMAND_UI(ID_OBJECT_MOVETOBACK, OnUpdateSingleSelect)
 	ON_UPDATE_COMMAND_UI(ID_OBJECT_MOVETOFRONT, OnUpdateSingleSelect)
 	ON_WM_CONTEXTMENU()
+
+	ON_COMMAND(ID_TODBS, ourTODBS)//ZDO
 	//}}AFX_MSG_MAP
 	// Standard printing commands
 	ON_COMMAND(ID_FILE_PRINT, OnFilePrint)
@@ -1317,23 +1319,8 @@ void CDrawView::OnPrint(CDC* pDC, CPrintInfo* pInfo)
 
 
 //ZDO
-/*void CDrawView::ourDrawEllipse(const CPoint& point,const CString &attrNameAndType)
+void CDrawView::ourTODBS()
 {
-	/*COleClientItem* pActiveItem =((GetDocument())->GetInPlaceActiveItem(this));
-	if (pActiveItem != NULL)
-	{
-		pActiveItem->Close();
-		ASSERT(GetDocument()->GetInPlaceActiveItem(this) == NULL);
-	}看来要挪到drawtool里了
-	CPoint local;
-	local.SetPoint(point.x+20,point.y+20);
-	//ClientToDoc(local);
-	CDrawRect* pObj = new CDrawRect(CRect(local, CSize(-50, 50)),attrNameAndType);
-	pObj->m_nShape = CDrawRect::ellipse;
-	((CDrawDoc*)m_pDocument)->Add(pObj);
-	//Select(pObj);
-	CDrawTool::c_drawShape = selection;
-	CDrawTool::ourDrawEllipse(this,point,attrNameAndType);
-//让entry对话框调用此函数
-}*/
+
+}
 //ZDID

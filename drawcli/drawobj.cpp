@@ -432,8 +432,13 @@ void CDrawObj::AssertValid()
 
 IMPLEMENT_SERIAL(CDrawRect, CDrawObj, 0)
 
+
+
+
 CDrawRect::CDrawRect()
 {
+	relationToEntry[0]=NULL;
+	relationToEntry[1]=NULL;
 }
 
 CDrawRect::CDrawRect(const CRect& position,const CString& objName)//ZDO
@@ -444,6 +449,8 @@ CDrawRect::CDrawRect(const CRect& position,const CString& objName)//ZDO
 	m_nShape = rectangle;
 	m_roundness.x = 16;
 	m_roundness.y = 16;
+	relationToEntry[0]=NULL;
+	relationToEntry[1]=NULL;
 }
 
 void CDrawRect::Serialize(CArchive& ar)
@@ -476,17 +483,24 @@ void CDrawRect::OnOpen(CDrawView* pView)
 		pDlg =new ourCRelationDlg();
 		POSITION pos;
 ////////////////////////////////////////
-		CDrawObjList *objList = pView->GetDocument()->GetObjects();
-		pos = objList->GetHeadPosition();
-		CDrawRect *pRect;
-		while (pos != NULL)
+		if(relationToEntry[0]==NULL&&relationToEntry[1]==NULL)
 		{
-			pRect=(CDrawRect*)objList->GetNext(pos);
-			if(pRect->m_nShape==rectangle)
+			CDrawObjList *objList = pView->GetDocument()->GetObjects();
+			pos = objList->GetHeadPosition();
+			CDrawRect *pRect;
+			while (pos != NULL)
 			{
-				pDlg->CStrLEntry.AddTail(pRect->ourObjName);
-				pDlg->CPtrLEntry.AddTail(pRect);
+				pRect=(CDrawRect*)objList->GetNext(pos);
+				if(pRect->m_nShape==rectangle)
+				{
+					pDlg->CStrLEntry.AddTail(pRect->ourObjName);
+					pDlg->CPtrLEntry.AddTail(pRect);
+				}
 			}
+		}
+		else
+		{
+			pDlg->CStrLEntry.AddTail("关系已设置");
 		}
 ///////////////////////////////////////
 		CString attr;
@@ -519,17 +533,34 @@ void CDrawRect::OnOpen(CDrawView* pView)
 			CDrawTool::ourDrawAttri(pView, local, centre, attr);
 			offset++;
 		}
-		//画直线 
-		实体用prtlist  关系用两个drawrect*
-		centre=this->m_position.CenterPoint();
-		CPoint entryPoint=pDlg->pRectLeft->m_position.CenterPoint();
-		CDrawTool::ourDrawRelation(pView,entryPoint,centre,(CString)"");
-		entryPoint=pDlg->pRectRight->m_position.CenterPoint();
-		CDrawTool::ourDrawRelation(pView,entryPoint,centre,(CString)"");
-		
-		
-		Invalidate();
-		delete pDlg;
+		//画关系的直线 
+		if(relationToEntry[0]==NULL&&relationToEntry[1]==NULL)
+		{
+			centre=this->m_position.CenterPoint();
+			CPoint entryPoint=pDlg->pRectLeft->m_position.CenterPoint();
+			CDrawTool::ourDrawRelation(pView,entryPoint,centre,(CString)"");
+			entryPoint=pDlg->pRectRight->m_position.CenterPoint();
+			CDrawTool::ourDrawRelation(pView,entryPoint,centre,(CString)"");
+			//实体用prtlist  关系用两个drawrect*
+			if(this->CStrLAttr.IsEmpty())
+			{
+
+				pDlg->pRectLeft->myRelation.AddTail(pDlg->pRectRight);
+				pDlg->pRectRight->myRelation.AddTail(pDlg->pRectLeft);
+			}
+				relationToEntry[0]=pDlg->pRectLeft;
+				relationToEntry[1]=pDlg->pRectRight;
+		}
+		else if(!(this->CStrLAttr.IsEmpty())&&relationToEntry[0]==NULL)
+		{
+			pos = pDlg->pRectLeft->myRelation.Find(pDlg->pRectRight);
+			pDlg->pRectLeft->myRelation.RemoveAt(pos);
+			pos = pDlg->pRectRight->myRelation.Find(pDlg->pRectLeft);
+			pDlg->pRectRight->myRelation.RemoveAt(pos);
+
+		}
+			Invalidate();
+			delete pDlg;
 	}
 	else if(this->m_nShape==rectangle)
 	{
@@ -571,6 +602,52 @@ void CDrawRect::OnOpen(CDrawView* pView)
 		delete pDlg;
 	}
 }
+
+CString* CDrawRect::ourCreateTable()
+{
+	//对于关系在调用此函数之前用关系是否有变量来区分调用与否
+	CString &sql=*(new CString ("create table "+ourObjName+"( ID int,"));
+	if(this->m_nShape==rectangle)
+	{
+		CString tempName,tempType;
+		POSITION pos=CStrLAttr.GetHeadPosition();
+		int iIndex;
+		while (pos != NULL)
+		{
+			tempName += CStrLAttr.GetNext(pos);
+			iIndex=tempName.Find("(");
+			tempType+=tempName;
+			tempType.Delete(0,iIndex+1);
+			tempType.Remove(')');
+			sql += tempName+' '+tempType;
+			if(tempType.Find("char")>=0)
+				sql += "(30)";
+			sql +=",";
+			tempName.Empty();
+			tempType.Empty();
+		}
+		sql+="primary key(ID)";
+		CDrawRect *foreignEntry;
+		pos=myRelation.GetHeadPosition();
+		//foreign key (branch_name) references branch )
+		while (pos != NULL)
+		{
+			foreignEntry=(CDrawRect*)myRelation.GetNext(pos);
+			sql+=",foreign key ("+foreignEntry->ourObjName+") references ID";
+		}
+		sql+=')';
+	}
+	else if(this->m_nShape==diamond)
+	{
+		//该写这了
+	}
+	else 
+	{
+		return NULL;
+	}
+	return &sql;
+}
+
 //ZDID
 //MDO:画菱形
 void ourDiamond(const CRect& rect,CDC* pDC)
