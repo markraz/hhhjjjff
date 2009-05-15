@@ -606,6 +606,7 @@ void CDrawRect::OnOpen(CDrawView* pView)
 CString* CDrawRect::ourCreateTable()
 {
 	//对于关系在调用此函数之前用关系是否有变量来区分调用与否
+	bool flag = true;
 	CString &sql=*(new CString ("create table "+ourObjName+"( ID int,"));
 	if(this->m_nShape==rectangle)
 	{
@@ -639,13 +640,45 @@ CString* CDrawRect::ourCreateTable()
 	}
 	else if(this->m_nShape==diamond)
 	{
-		//该写这了
+		if(CStrLAttr.IsEmpty())
+			flag=false;
+		else
+		{
+			CString tempName,tempType;
+			POSITION pos=CStrLAttr.GetHeadPosition();
+			int iIndex;
+			while (pos != NULL)
+			{
+				tempName += CStrLAttr.GetNext(pos);
+				iIndex=tempName.Find("(");
+				tempType+=tempName;
+				tempType.Delete(0,iIndex+1);
+				tempType.Remove(')');
+				sql += tempName+' '+tempType;
+				if(tempType.Find("char")>=0)
+					sql += "(30)";
+				sql +=",";
+				tempName.Empty();
+				tempType.Empty();
+			}
+			sql+="primary key(ID)";
+			int i=0,rTE_Length=2;
+			for(;i<rTE_Length;i++)
+			{
+				sql+=",foreign key ("+relationToEntry[i]->ourObjName+") references ID";
+			}
+			sql+=')';
+		}
+
 	}
 	else 
 	{
-		return NULL;
+		flag=false;
 	}
-	return &sql;
+	if(flag)
+		return &sql;
+	else
+		return NULL;
 }
 
 //ZDID
