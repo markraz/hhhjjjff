@@ -25,7 +25,6 @@
 #define IDC_TEMPLATE                    110
 #define IDD_ENTRY_DIALOG                110
 #define IDC_SAVEDBY                     111
-#define IDD_RELATION_DIALOG1            111
 #define IDD_RELATION_DIALOG             111
 #define IDC_REVNUM                      112
 #define IDC_EDITTIME                    113
@@ -67,13 +66,15 @@
 #define ID_BUTTON32810                  -32726
 #define ID_BUTTON32811                  -32725
 #define ID_APP_ENTRY                    32812
+#define ID_BUTTON32814                  32814
+#define ID_TODBS                        32814
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        112
-#define _APS_NEXT_COMMAND_VALUE         32813
+#define _APS_NEXT_COMMAND_VALUE         32815
 #define _APS_NEXT_CONTROL_VALUE         135
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

@@ -182,7 +182,17 @@ void ourCRelationDlg::OnBnClickedButton2()
 void ourCRelationDlg::OnBnClickedOk()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	pRectLeft=(CDrawRect*)CPtrLEntry.GetAt(CPtrLEntry.FindIndex(ourCCBCtrl1.GetCurSel()));
-	pRectRight=(CDrawRect*)CPtrLEntry.GetAt(CPtrLEntry.FindIndex(ourCCBCtrl2.GetCurSel()));
+	int iIndex1=ourCCBCtrl1.GetCurSel();
+	int iIndex2=ourCCBCtrl2.GetCurSel();
+	if(iIndex1>=0&&iIndex2>=0)
+	{
+		POSITION pos=CPtrLEntry.FindIndex(iIndex1);
+		if(pos!=NULL)
+			pRectLeft=(CDrawRect*)CPtrLEntry.GetAt(pos);
+
+		pos=CPtrLEntry.FindIndex(iIndex2);
+		if(pos!=NULL)
+			pRectRight=(CDrawRect*)CPtrLEntry.GetAt(pos);
+	}
 	OnOK();
 }

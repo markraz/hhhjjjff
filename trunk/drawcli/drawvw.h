@@ -160,6 +160,7 @@ protected:
 	afx_msg void OnUpdateEditSelectAll(CCmdUI* pCmdUI);
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
+	afx_msg void ourTODBS();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 
