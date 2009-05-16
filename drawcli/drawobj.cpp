@@ -483,7 +483,8 @@ void CDrawRect::OnOpen(CDrawView* pView)
 		pDlg =new ourCRelationDlg();
 		POSITION pos;
 ////////////////////////////////////////
-		if(relationToEntry[0]==NULL&&relationToEntry[1]==NULL)
+		if(relationToEntry[0]==NULL
+			&&relationToEntry[1]==NULL)
 		{
 			CDrawObjList *objList = pView->GetDocument()->GetObjects();
 			pos = objList->GetHeadPosition();
@@ -534,7 +535,8 @@ void CDrawRect::OnOpen(CDrawView* pView)
 			offset++;
 		}
 		//画关系的直线 
-		if(relationToEntry[0]==NULL&&relationToEntry[1]==NULL)
+		if(relationToEntry[0]==NULL
+			&&relationToEntry[1]==NULL)
 		{
 			centre=this->m_position.CenterPoint();
 			CPoint entryPoint=pDlg->pRectLeft->m_position.CenterPoint();
@@ -551,7 +553,8 @@ void CDrawRect::OnOpen(CDrawView* pView)
 				relationToEntry[0]=pDlg->pRectLeft;
 				relationToEntry[1]=pDlg->pRectRight;
 		}
-		else if(!(this->CStrLAttr.IsEmpty())&&relationToEntry[0]==NULL)
+		else if(!(this->CStrLAttr.IsEmpty())
+				&&relationToEntry[0]==NULL)
 		{
 			pos = pDlg->pRectLeft->myRelation.Find(pDlg->pRectRight);
 			pDlg->pRectLeft->myRelation.RemoveAt(pos);

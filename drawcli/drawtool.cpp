@@ -428,6 +428,38 @@ void CRectTool::OnMouseMove(CDrawView* pView, UINT nFlags, const CPoint& point)
 }
 
 
+
+CString* CRectTool::ourTODBS(CDrawView* pView)
+{
+	CString *pCstr,sqlEntry,sqlRelation,*pCstrSQL;
+	CDrawObjList *objList = pView->GetDocument()->GetObjects();
+	POSITION pos = objList->GetHeadPosition();
+	CDrawRect *pRect;
+	while (pos != NULL)
+	{
+		pRect=(CDrawRect*)objList->GetNext(pos);
+		if(pRect->m_nShape==CDrawRect::rectangle)
+		{
+			pCstr=pRect->ourCreateTable();
+			if(pCstr==NULL)
+				continue;
+			sqlEntry += *pCstr;
+			delete pCstr;
+		}
+		else if(pRect->m_nShape==CDrawRect::diamond
+				&&!(pRect->CStrLAttr.IsEmpty()))
+		{
+			pCstr=pRect->ourCreateTable();
+			if(pCstr==NULL)
+				continue;
+			sqlEntry += *pCstr;
+			delete pCstr;
+		}
+	}
+	pCstrSQL=new CString(sqlEntry+sqlRelation);
+	return pCstrSQL;
+}
+
 ////////////////////////////////////////////////////////////////////////////
 // CPolyTool
 
