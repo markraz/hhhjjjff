@@ -33,7 +33,6 @@ public:
 protected:
 	//{{AFX_MSG(CDrawApp)
 	afx_msg void OnAppAbout();
-	afx_msg void OnAppEntry();
 		// NOTE - the ClassWizard will add and remove member functions here.
 		//    DO NOT EDIT what you see in these blocks of generated code !
 	//}}AFX_MSG

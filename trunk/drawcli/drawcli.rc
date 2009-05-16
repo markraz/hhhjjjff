@@ -68,6 +68,27 @@ BEGIN
     COMBOBOX        IDC_COMBO3,97,44,54,53,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
 END
 
+IDD_EXPORT_DIALOG DIALOGEX 0, 0, 224, 184
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "导出"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_EDIT1,155,87,51,14,ES_AUTOHSCROLL
+    LTEXT           "端口：",IDC_STATIC,126,89,27,12
+    COMBOBOX        IDC_COMBO1,69,113,52,33,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT2,56,134,52,14,ES_AUTOHSCROLL
+    LTEXT           "用户名：",IDC_STATIC,16,136,33,8
+    PUSHBUTTON      "导出",IDC_BUTTON1,53,156,41,14
+    LTEXT           "数据库类型：",IDC_STATIC,15,114,49,8
+    LTEXT           "密码：",IDC_STATIC,122,137,25,8
+    EDITTEXT        IDC_EDIT3,154,135,51,14,ES_PASSWORD | ES_AUTOHSCROLL
+    LTEXT           "数据库IP：",IDC_STATIC,14,89,40,8
+    CONTROL         "",IDC_IPADDRESS1,"SysIPAddress32",WS_TABSTOP,57,87,66,15
+    LTEXT           "SQL语句：",IDC_STATIC,19,11,38,8
+    PUSHBUTTON      "测试连接",IDC_BUTTON2,115,156,50,14
+    EDITTEXT        IDC_EDIT4,16,21,186,55,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -91,6 +112,14 @@ BEGIN
         RIGHTMARGIN, 190
         TOPMARGIN, 7
         BOTTOMMARGIN, 181
+    END
+
+    IDD_EXPORT_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 217
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 177
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -143,6 +172,13 @@ BEGIN
     0
 END
 
+IDD_EXPORT_DIALOG DLGINIT
+BEGIN
+    IDC_COMBO1, 0x403, 10, 0
+0x794d, 0x5153, 0x204c, 0x2e35, 0x0031, 
+    0
+END
+
 #endif    // 中文(中华人民共和国) resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -155,6 +191,111 @@ END
 LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 #endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 34, 22, 217, 55
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Drawcli"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "Drawcli Application Version 3.0",IDC_STATIC,40,10,119,8
+    LTEXT           "? 1993 - 2001 Microsoft Corporation.  All rights reserved.",IDC_STATIC,40,25,122,19
+    DEFPUSHBUTTON   "OK",IDOK,176,6,32,14,WS_GROUP
+END
+
+IDD_PROP_RECT DIALOG  20, 20, 186, 93
+STYLE DS_SETFONT | DS_CONTEXTHELP | WS_CHILD | WS_VISIBLE | WS_DISABLED | WS_CAPTION
+CAPTION "General"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Outline",IDC_STATIC,6,6,101,33
+    LTEXT           "Weight:",IDC_STATIC,11,20,27,8
+    EDITTEXT        IDC_WEIGHT,41,18,30,13,ES_AUTOHSCROLL
+    CONTROL         "Spin1",IDC_SPIN1,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,71,18,10,14
+    GROUPBOX        "Fill",IDC_STATIC,6,44,100,40
+    CONTROL         "None",IDC_NOFILL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,56,35,10
+END
+
+IDD_SUMM_PAGE DIALOG  0, 0, 184, 163
+STYLE DS_SETFONT | DS_CONTEXTHELP | WS_CHILD | WS_VISIBLE | WS_DISABLED | WS_CAPTION | WS_SYSMENU
+CAPTION "Summary"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Author:",IDC_STATIC,7,23,24,8
+    LTEXT           "Keywords:",IDC_STATIC,7,39,34,8
+    LTEXT           "Comments:",IDC_STATIC,7,55,36,8
+    LTEXT           "Title:",IDC_STATIC,7,105,16,8
+    LTEXT           "Subject:",IDC_STATIC,7,121,27,8
+    LTEXT           "Template:",IDC_STATIC,7,137,32,8
+    EDITTEXT        IDC_AUTHOR,46,23,119,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_KEYWORDS,46,39,119,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_COMMENTS,46,55,119,47,ES_MULTILINE | ES_WANTRETURN | WS_VSCROLL
+    EDITTEXT        IDC_TITLE,46,105,119,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_SUBJECT,46,121,119,13,ES_AUTOHSCROLL
+    EDITTEXT        IDC_TEMPLATE,46,137,119,13,ES_AUTOHSCROLL
+    LTEXT           "Application:",IDC_STATIC,7,7,38,8
+    LTEXT           "Static",IDC_APPNAME,46,7,119,8
+END
+
+IDD_STAT_PAGE DIALOG  0, 0, 184, 161
+STYLE DS_SETFONT | DS_CONTEXTHELP | WS_CHILD | WS_VISIBLE | WS_DISABLED | WS_CAPTION | WS_SYSMENU
+CAPTION "Statistics"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "Last Saved By:",IDC_STATIC,7,13,49,8
+    LTEXT           "Static",IDC_SAVEDBY,72,13,84,8
+    LTEXT           "Revision number:",IDC_STATIC,7,27,56,8
+    LTEXT           "Total Editing Time:",IDC_STATIC,7,41,60,8
+    LTEXT           "Static",IDC_EDITTIME,72,41,84,8
+    LTEXT           "Last Printed:",IDC_STATIC,7,55,40,8
+    LTEXT           "Static",IDC_LASTPRINT,72,55,84,8
+    LTEXT           "Created:",IDC_STATIC,7,69,28,8
+    LTEXT           "Static",IDC_CREATEDATE,72,69,84,8
+    LTEXT           "Last Saved:",IDC_STATIC,7,83,39,8
+    LTEXT           "Static",IDC_LASTSAVE,72,83,84,8
+    LTEXT           "# Pages:",IDC_STATIC,7,97,30,8
+    LTEXT           "Static",IDC_NUMPAGES,72,97,32,8
+    LTEXT           "# words:",IDC_STATIC,7,111,28,8
+    LTEXT           "Static",IDC_NUMWORDS,72,111,32,8
+    LTEXT           "# chars:",IDC_STATIC,7,125,27,8
+    LTEXT           "Static",IDC_NUMCHARS,72,125,32,8
+    LTEXT           "Static",IDC_REVNUM,72,27,84,8
+    LTEXT           "Security Level:",IDC_STATIC,7,139,48,8
+    LTEXT           "Static",IDC_SECURITY,72,139,32,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_SUMM_PAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 177
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 156
+    END
+
+    IDD_STAT_PAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 177
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 159
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -415,84 +556,6 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Dialog
-//
-
-IDD_ABOUTBOX DIALOGEX 34, 22, 217, 55
-STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-CAPTION "About Drawcli"
-FONT 8, "MS Sans Serif", 0, 0, 0x1
-BEGIN
-    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
-    LTEXT           "Drawcli Application Version 3.0",IDC_STATIC,40,10,119,8
-    LTEXT           "? 1993 - 2001 Microsoft Corporation.  All rights reserved.",IDC_STATIC,40,25,122,19
-    DEFPUSHBUTTON   "OK",IDOK,176,6,32,14,WS_GROUP
-END
-
-IDD_PROP_RECT DIALOG  20, 20, 186, 93
-STYLE DS_SETFONT | DS_CONTEXTHELP | WS_CHILD | WS_VISIBLE | WS_DISABLED | WS_CAPTION
-CAPTION "General"
-FONT 8, "MS Sans Serif"
-BEGIN
-    GROUPBOX        "Outline",IDC_STATIC,6,6,101,33
-    LTEXT           "Weight:",IDC_STATIC,11,20,27,8
-    EDITTEXT        IDC_WEIGHT,41,18,30,13,ES_AUTOHSCROLL
-    CONTROL         "Spin1",IDC_SPIN1,"msctls_updown32",UDS_SETBUDDYINT | UDS_ALIGNRIGHT | UDS_AUTOBUDDY | UDS_ARROWKEYS,71,18,10,14
-    GROUPBOX        "Fill",IDC_STATIC,6,44,100,40
-    CONTROL         "None",IDC_NOFILL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,56,35,10
-END
-
-IDD_SUMM_PAGE DIALOG  0, 0, 184, 163
-STYLE DS_SETFONT | DS_CONTEXTHELP | WS_CHILD | WS_VISIBLE | WS_DISABLED | WS_CAPTION | WS_SYSMENU
-CAPTION "Summary"
-FONT 8, "MS Sans Serif"
-BEGIN
-    LTEXT           "Author:",IDC_STATIC,7,23,24,8
-    LTEXT           "Keywords:",IDC_STATIC,7,39,34,8
-    LTEXT           "Comments:",IDC_STATIC,7,55,36,8
-    LTEXT           "Title:",IDC_STATIC,7,105,16,8
-    LTEXT           "Subject:",IDC_STATIC,7,121,27,8
-    LTEXT           "Template:",IDC_STATIC,7,137,32,8
-    EDITTEXT        IDC_AUTHOR,46,23,119,13,ES_AUTOHSCROLL
-    EDITTEXT        IDC_KEYWORDS,46,39,119,13,ES_AUTOHSCROLL
-    EDITTEXT        IDC_COMMENTS,46,55,119,47,ES_MULTILINE | ES_WANTRETURN | WS_VSCROLL
-    EDITTEXT        IDC_TITLE,46,105,119,13,ES_AUTOHSCROLL
-    EDITTEXT        IDC_SUBJECT,46,121,119,13,ES_AUTOHSCROLL
-    EDITTEXT        IDC_TEMPLATE,46,137,119,13,ES_AUTOHSCROLL
-    LTEXT           "Application:",IDC_STATIC,7,7,38,8
-    LTEXT           "Static",IDC_APPNAME,46,7,119,8
-END
-
-IDD_STAT_PAGE DIALOG  0, 0, 184, 161
-STYLE DS_SETFONT | DS_CONTEXTHELP | WS_CHILD | WS_VISIBLE | WS_DISABLED | WS_CAPTION | WS_SYSMENU
-CAPTION "Statistics"
-FONT 8, "MS Sans Serif"
-BEGIN
-    LTEXT           "Last Saved By:",IDC_STATIC,7,13,49,8
-    LTEXT           "Static",IDC_SAVEDBY,72,13,84,8
-    LTEXT           "Revision number:",IDC_STATIC,7,27,56,8
-    LTEXT           "Total Editing Time:",IDC_STATIC,7,41,60,8
-    LTEXT           "Static",IDC_EDITTIME,72,41,84,8
-    LTEXT           "Last Printed:",IDC_STATIC,7,55,40,8
-    LTEXT           "Static",IDC_LASTPRINT,72,55,84,8
-    LTEXT           "Created:",IDC_STATIC,7,69,28,8
-    LTEXT           "Static",IDC_CREATEDATE,72,69,84,8
-    LTEXT           "Last Saved:",IDC_STATIC,7,83,39,8
-    LTEXT           "Static",IDC_LASTSAVE,72,83,84,8
-    LTEXT           "# Pages:",IDC_STATIC,7,97,30,8
-    LTEXT           "Static",IDC_NUMPAGES,72,97,32,8
-    LTEXT           "# words:",IDC_STATIC,7,111,28,8
-    LTEXT           "Static",IDC_NUMWORDS,72,111,32,8
-    LTEXT           "# chars:",IDC_STATIC,7,125,27,8
-    LTEXT           "Static",IDC_NUMCHARS,72,125,32,8
-    LTEXT           "Static",IDC_REVNUM,72,27,84,8
-    LTEXT           "Security Level:",IDC_STATIC,7,139,48,8
-    LTEXT           "Static",IDC_SECURITY,72,139,32,8
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
 // Cursor
 //
 
@@ -534,33 +597,6 @@ BEGIN
         VALUE "Translation", 0x409, 1200
     END
 END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// DESIGNINFO
-//
-
-#ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
-BEGIN
-    IDD_SUMM_PAGE, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 177
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 156
-    END
-
-    IDD_STAT_PAGE, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 177
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 159
-    END
-END
-#endif    // APSTUDIO_INVOKED
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -751,11 +787,6 @@ BEGIN
     ID_VIEW_SHOWOBJECTS     "Toggle OLE object indication"
     ID_EDIT_PROPERTIES      "Edit drawing object properties"
     ID_FILE_SUMMARYINFO     "Display summary information"
-END
-
-STRINGTABLE 
-BEGIN
-    ID_APP_ENTRY            "生成实体"
 END
 
 #endif    // 英语(美国) resources
