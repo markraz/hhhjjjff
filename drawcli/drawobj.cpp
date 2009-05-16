@@ -639,7 +639,7 @@ CString* CDrawRect::ourCreateTable()
 			foreignEntry=(CDrawRect*)myRelation.GetNext(pos);
 			sql+=",foreign key ("+foreignEntry->ourObjName+") references ID";
 		}
-		sql+=')';
+		sql+=");";
 	}
 	else if(this->m_nShape==diamond)
 	{
@@ -670,7 +670,7 @@ CString* CDrawRect::ourCreateTable()
 			{
 				sql+=",foreign key ("+relationToEntry[i]->ourObjName+") references ID";
 			}
-			sql+=')';
+			sql+=");";
 		}
 
 	}

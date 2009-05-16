@@ -196,3 +196,34 @@ void ourCRelationDlg::OnBnClickedOk()
 	}
 	OnOK();
 }
+// ourCDlg.cpp : 实现文件
+//
+
+
+// ourExportDlg 对话框
+
+IMPLEMENT_DYNAMIC(ourExportDlg, CDialog)
+
+ourExportDlg::ourExportDlg(CWnd* pParent /*=NULL*/)
+	: CDialog(ourExportDlg::IDD, pParent)
+	, ourCreateSQL(_T(""))
+{
+
+}
+
+ourExportDlg::~ourExportDlg()
+{
+}
+
+void ourExportDlg::DoDataExchange(CDataExchange* pDX)
+{
+	CDialog::DoDataExchange(pDX);
+	DDX_Text(pDX, IDC_EDIT4, ourCreateSQL);
+}
+
+
+BEGIN_MESSAGE_MAP(ourExportDlg, CDialog)
+END_MESSAGE_MAP()
+
+
+// ourExportDlg 消息处理程序

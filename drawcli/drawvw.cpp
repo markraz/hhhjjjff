@@ -1326,6 +1326,9 @@ void CDrawView::ourTODBS()
 	sql+=*pCstr;
 	delete pCstr;
 	//再做个对话框
+	ourExportDlg dlg;
+	dlg.ourCreateSQL+=sql;
+	dlg.DoModal();
 
 }
 //ZDID

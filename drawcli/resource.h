@@ -27,6 +27,7 @@
 #define IDC_SAVEDBY                     111
 #define IDD_RELATION_DIALOG             111
 #define IDC_REVNUM                      112
+#define IDD_EXPORT_DIALOG               112
 #define IDC_EDITTIME                    113
 #define IDC_LASTPRINT                   114
 #define IDC_CREATEDATE                  115
@@ -45,6 +46,10 @@
 #define IDC_BUTTON2                     129
 #define IDC_COMBO2                      133
 #define IDC_COMBO3                      134
+#define IDC_EDIT3                       135
+#define IDC_IPADDRESS1                  136
+#define IDC_EDIT4                       137
+#define IDC_RICHEDIT21                  138
 #define ID_CANCEL_EDIT                  32768
 #define ID_VIEW_GRID                    32769
 #define ID_DRAW_SELECT                  32770
@@ -65,8 +70,6 @@
 #define ID_FILE_SUMMARYINFO             32792
 #define ID_BUTTON32810                  -32726
 #define ID_BUTTON32811                  -32725
-#define ID_APP_ENTRY                    32812
-#define ID_BUTTON32814                  32814
 #define ID_TODBS                        32814
 
 // Next default values for new objects
@@ -75,7 +78,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        112
 #define _APS_NEXT_COMMAND_VALUE         32815
-#define _APS_NEXT_CONTROL_VALUE         135
+#define _APS_NEXT_CONTROL_VALUE         139
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

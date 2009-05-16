@@ -31,7 +31,6 @@ static char BASED_CODE THIS_FILE[] = __FILE__;
 BEGIN_MESSAGE_MAP(CDrawApp, CWinApp)
 	//{{AFX_MSG_MAP(CDrawApp)
 	ON_COMMAND(ID_APP_ABOUT, OnAppAbout)
-	ON_COMMAND(ID_APP_ENTRY, OnAppEntry)
 		// NOTE - the ClassWizard will add and remove mapping macros here.
 		//    DO NOT EDIT what you see in these blocks of generated code!
 	//}}AFX_MSG_MAP
@@ -176,11 +175,6 @@ void CDrawApp::OnAppAbout()
 	aboutDlg.DoModal();
 }
 
-void CDrawApp::OnAppEntry()
-{
-	ourCEntryDlg entryDlg;
-	entryDlg.DoModal();
-}
 
 /////////////////////////////////////////////////////////////////////////////
 // CDrawApp commands
