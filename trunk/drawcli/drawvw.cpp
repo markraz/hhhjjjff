@@ -1321,6 +1321,11 @@ void CDrawView::OnPrint(CDC* pDC, CPrintInfo* pInfo)
 //ZDO
 void CDrawView::ourTODBS()
 {
+	CString sql,*pCstr;
+	pCstr=CRectTool::ourTODBS(this);
+	sql+=*pCstr;
+	delete pCstr;
+	//再做个对话框
 
 }
 //ZDID

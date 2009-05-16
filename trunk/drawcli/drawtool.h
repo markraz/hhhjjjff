@@ -80,6 +80,8 @@ public:
 	virtual void OnLButtonDblClk(CDrawView* pView, UINT nFlags, const CPoint& point);
 	virtual void OnLButtonUp(CDrawView* pView, UINT nFlags, const CPoint& point);
 	virtual void OnMouseMove(CDrawView* pView, UINT nFlags, const CPoint& point);
+
+	static CString* ourTODBS(CDrawView* pView);
 };
 
 class CPolyTool : public CDrawTool
