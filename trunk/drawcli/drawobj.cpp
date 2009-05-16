@@ -536,7 +536,9 @@ void CDrawRect::OnOpen(CDrawView* pView)
 		}
 		//画关系的直线 
 		if(relationToEntry[0]==NULL
-			&&relationToEntry[1]==NULL)
+			&&relationToEntry[1]==NULL
+			&&pDlg->pRectLeft!=NULL
+			&&pDlg->pRectRight!=NULL)
 		{
 			centre=this->m_position.CenterPoint();
 			CPoint entryPoint=pDlg->pRectLeft->m_position.CenterPoint();
@@ -550,15 +552,14 @@ void CDrawRect::OnOpen(CDrawView* pView)
 				pDlg->pRectLeft->myRelation.AddTail(pDlg->pRectRight);
 				pDlg->pRectRight->myRelation.AddTail(pDlg->pRectLeft);
 			}
-				relationToEntry[0]=pDlg->pRectLeft;
-				relationToEntry[1]=pDlg->pRectRight;
+			relationToEntry[0]=pDlg->pRectLeft;
+			relationToEntry[1]=pDlg->pRectRight;
 		}
-		else if(!(this->CStrLAttr.IsEmpty())
-				&&relationToEntry[0]==NULL)
+		else if(!(this->CStrLAttr.IsEmpty()))
 		{
-			pos = pDlg->pRectLeft->myRelation.Find(pDlg->pRectRight);
+			pos = pDlg->pRectLeft->myRelation.Find((CObject *)&(pDlg->pRectRight));
 			pDlg->pRectLeft->myRelation.RemoveAt(pos);
-			pos = pDlg->pRectRight->myRelation.Find(pDlg->pRectLeft);
+			pos = pDlg->pRectRight->myRelation.Find((CObject *)&(pDlg->pRectLeft));
 			pDlg->pRectRight->myRelation.RemoveAt(pos);
 
 		}
@@ -621,6 +622,7 @@ CString* CDrawRect::ourCreateTable()
 			tempName += CStrLAttr.GetNext(pos);
 			iIndex=tempName.Find("(");
 			tempType+=tempName;
+			tempName.Delete(iIndex,tempName.Find(")")-iIndex+1);
 			tempType.Delete(0,iIndex+1);
 			tempType.Remove(')');
 			sql += tempName+' '+tempType;
@@ -637,9 +639,9 @@ CString* CDrawRect::ourCreateTable()
 		while (pos != NULL)
 		{
 			foreignEntry=(CDrawRect*)myRelation.GetNext(pos);
-			sql+=",foreign key ("+foreignEntry->ourObjName+") references ID";
+			sql+=",foreign key (ID) references "+foreignEntry->ourObjName+"(ID)";
 		}
-		sql+=");";
+		sql+=") ";
 	}
 	else if(this->m_nShape==diamond)
 	{
@@ -655,6 +657,7 @@ CString* CDrawRect::ourCreateTable()
 				tempName += CStrLAttr.GetNext(pos);
 				iIndex=tempName.Find("(");
 				tempType+=tempName;
+				tempName.Delete(iIndex,tempName.Find(")")-iIndex+1);
 				tempType.Delete(0,iIndex+1);
 				tempType.Remove(')');
 				sql += tempName+' '+tempType;
@@ -668,9 +671,9 @@ CString* CDrawRect::ourCreateTable()
 			int i=0,rTE_Length=2;
 			for(;i<rTE_Length;i++)
 			{
-				sql+=",foreign key ("+relationToEntry[i]->ourObjName+") references ID";
+				sql+=",foreign key (ID) references "+relationToEntry[i]->ourObjName+"(ID)";
 			}
-			sql+=");";
+			sql+=") ";
 		}
 
 	}
@@ -1210,7 +1213,7 @@ CDrawOleObj::CDrawOleObj() : m_extent(0,0)
 }
 
 CDrawOleObj::CDrawOleObj(const CRect& position)
-	: CDrawObj(position,(CString)"Unnamed"), m_extent(0, 0)//ZDO
+	: CDrawObj(position,(CString)"unnamed"), m_extent(0, 0)//ZDO
 {
 	m_pClientItem = NULL;
 }

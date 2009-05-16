@@ -367,7 +367,7 @@ void CRectTool::OnLButtonDown(CDrawView* pView, UINT nFlags, const CPoint& point
 		sizeX=-90;
 		sizeY=40;
 	}
-	CDrawRect* pObj = new CDrawRect(CRect(local, CSize(sizeX, sizeY)),(CString)"Unnamed");//ZDO
+	CDrawRect* pObj = new CDrawRect(CRect(local, CSize(sizeX, sizeY)),(CString)"unnamed");//ZDO
 	switch (m_drawShape)
 	{
 	default:
@@ -452,8 +452,9 @@ CString* CRectTool::ourTODBS(CDrawView* pView)
 			pCstr=pRect->ourCreateTable();
 			if(pCstr==NULL)
 				continue;
-			sqlEntry += *pCstr;
+			sqlRelation += *pCstr;
 			delete pCstr;
+
 		}
 	}
 	pCstrSQL=new CString(sqlEntry+sqlRelation);

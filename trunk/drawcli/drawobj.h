@@ -114,6 +114,7 @@ protected:
 	CPoint m_roundness; // for roundRect corners
 
 	friend class CRectTool;
+	friend class CDrawView;//ZDO
 	friend class CDrawTool;//ZDO
 };
 
