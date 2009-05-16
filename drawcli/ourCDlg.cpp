@@ -15,7 +15,7 @@ IMPLEMENT_DYNAMIC(ourCEntryDlg, CDialog)
 
 ourCEntryDlg::ourCEntryDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(ourCEntryDlg::IDD, pParent)
-	, entryName(_T("Unnamed"))
+	, entryName(_T("unnamed"))
 	, attrName(_T(""))
 	, attrType(_T(""))
 {
@@ -38,7 +38,7 @@ void ourCEntryDlg::DoDataExchange(CDataExchange* pDX)
 
 	CComboBox *pCB=(CComboBox*)GetDlgItem(IDC_COMBO1);//ZDO
 	pCB->SetCurSel(0);//ZDO:SetCurSel函数可改变标签控件当前选定的项目
-
+	entryName=entryName.MakeLower();
 
 
 		CString attr;
@@ -101,7 +101,7 @@ IMPLEMENT_DYNAMIC(ourCRelationDlg, CDialog)
 
 ourCRelationDlg::ourCRelationDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(ourCRelationDlg::IDD, pParent)
-	, relationName(_T("Unnamed"))
+	, relationName(_T("unnamed"))
 	, attrName(_T(""))
 	, attrType(_T(""))
 {
@@ -189,10 +189,17 @@ void ourCRelationDlg::OnBnClickedOk()
 		POSITION pos=CPtrLEntry.FindIndex(iIndex1);
 		if(pos!=NULL)
 			pRectLeft=(CDrawRect*)CPtrLEntry.GetAt(pos);
+			
 
 		pos=CPtrLEntry.FindIndex(iIndex2);
 		if(pos!=NULL)
 			pRectRight=(CDrawRect*)CPtrLEntry.GetAt(pos);
+			
+	}
+	else
+	{
+		pRectLeft=NULL;
+		pRectRight=NULL;
 	}
 	OnOK();
 }
