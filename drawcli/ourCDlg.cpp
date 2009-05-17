@@ -203,7 +203,7 @@ void ourCRelationDlg::OnBnClickedOk()
 	}
 	OnOK();
 }
-// ourCDlg.cpp : 实现文件
+// E:\Visual Studio 2005\Projects\bb\drawcli\ourCDlg.cpp : 实现文件
 //
 
 
@@ -214,6 +214,11 @@ IMPLEMENT_DYNAMIC(ourExportDlg, CDialog)
 ourExportDlg::ourExportDlg(CWnd* pParent /*=NULL*/)
 	: CDialog(ourExportDlg::IDD, pParent)
 	, ourCreateSQL(_T(""))
+	, ourDBPort(3306)
+	, ourLinkDB(_T("test"))
+	, ourDBpw(_T(""))
+	, ourDBUserName(_T("root"))
+	, IP(2130706433)
 {
 
 }
@@ -226,11 +231,117 @@ void ourExportDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_EDIT4, ourCreateSQL);
+	DDX_Text(pDX, IDC_EDIT1, ourDBPort);
+	DDV_MinMaxInt(pDX, ourDBPort, 0, 65536);
+	DDX_Text(pDX, IDC_EDIT5, ourLinkDB);
+	DDV_MaxChars(pDX, ourLinkDB, 30);
+	DDX_Text(pDX, IDC_EDIT3, ourDBpw);
+	DDV_MaxChars(pDX, ourDBpw, 30);
+	DDX_Text(pDX, IDC_EDIT2, ourDBUserName);
+	DDV_MaxChars(pDX, ourDBUserName, 30);
+	CComboBox *pCB=(CComboBox*)GetDlgItem(IDC_COMBO1);//ZDO
+	pCB->SetCurSel(0);//ZDO:SetCurSel函数可改变标签控件当前选定的项目
+	DDX_Control(pDX, IDC_IPADDRESS1, ourIPCtrl);
+	DDX_IPAddress(pDX, IDC_IPADDRESS1, IP);
 }
 
 
 BEGIN_MESSAGE_MAP(ourExportDlg, CDialog)
+	ON_BN_CLICKED(IDC_BUTTON1, &ourExportDlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTON2, &ourExportDlg::OnBnClickedButton2)
 END_MESSAGE_MAP()
 
 
 // ourExportDlg 消息处理程序
+
+void ourExportDlg::OnBnClickedButton1()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	bool flag=true;
+	int iIndex;
+	CString DBPort,DBServerIP,SQL;
+	DBPort.Format(_T("%d"),ourDBPort);
+	BYTE field0, field1, field2, field3;
+	ourIPCtrl.GetAddress(field0, field1, field2, field3);
+	DBServerIP.Format(_T("%d.%d.%d.%d"), field0, field1, field2, field3);
+	CDatabase db;
+	TRY
+	{
+		
+		db.OpenEx("Driver=MySQL ODBC 5.1 Driver;SERVER="+DBServerIP+";UID="+ourDBUserName+";PWD="+ourDBpw+";DATABASE="+ourLinkDB+";PORT="+DBPort);
+		while((iIndex=ourCreateSQL.Find(";"))>=0)
+		{
+			SQL.Append(ourCreateSQL,iIndex+1);
+			db.ExecuteSQL(SQL);
+			SQL.Empty();
+			ourCreateSQL.Delete(0,iIndex+1);
+		}
+		
+	}
+	CATCH_ALL(e)
+	{
+		flag=false;
+		THROW_LAST();
+	}
+	END_CATCH_ALL
+	db.Close();
+	if(flag)
+		MessageBox("E-R图成功导出至数据库");
+	else
+		MessageBox("E-R图导出至数据库失败");
+}
+
+void ourExportDlg::OnBnClickedButton2()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	CString DBPort,DBServerIP;
+	DBPort.Format(_T("%d"),ourDBPort);
+	BYTE field0, field1, field2, field3;
+	ourIPCtrl.GetAddress(field0, field1, field2, field3);
+	DBServerIP.Format(_T("%d.%d.%d.%d"), field0, field1, field2, field3);
+	CDatabase db;
+	db.OpenEx("Driver=MySQL ODBC 5.1 Driver;SERVER="+DBServerIP+";UID="+ourDBUserName+";PWD="+ourDBpw+";DATABASE="+ourLinkDB+";PORT="+DBPort);
+	if(db.IsOpen())
+		MessageBox("成功连接到数据库");
+	else
+		MessageBox("数据库连接失败");
+	db.Close();
+}
+
+
+	/*sql.Empty();
+	CDatabase db;
+	db.OpenEx("Driver=MySQL ODBC 5.1 Driver;SERVER=localhost;UID=root;PWD=890602;DATABASE=DDD;PORT=3306");
+	CDrawObjList *objList = GetDocument()->GetObjects();
+	POSITION pos = objList->GetHeadPosition();
+	CDrawRect *pRect;
+	while (pos != NULL)
+	{
+		pRect=(CDrawRect*)objList->GetNext(pos);
+		if(pRect->m_nShape==CDrawRect::rectangle)
+		{
+			pCstr=pRect->ourCreateTable();
+			if(pCstr==NULL)
+				continue;
+			sql += *pCstr;
+			db.ExecuteSQL(sql);
+			delete pCstr;
+		}
+		else if(pRect->m_nShape==CDrawRect::diamond
+				&&!(pRect->CStrLAttr.IsEmpty()))
+		{
+			pCstr=pRect->ourCreateTable();
+			if(pCstr==NULL)
+				continue;
+			sql += *pCstr;
+			db.ExecuteSQL(sql);
+			delete pCstr;
+		}
+		
+		sql.Empty();
+	}*/
+
+
+

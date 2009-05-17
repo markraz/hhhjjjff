@@ -1,14 +1,4 @@
 // drawvw.cpp : implementation of the CDrawView class
-//
-// This is a part of the Microsoft Foundation Classes C++ library.
-// Copyright (c) Microsoft Corporation.  All rights reserved.
-//
-// This source code is only intended as a supplement to the
-// Microsoft Foundation Classes Reference and related
-// electronic documentation provided with the library.
-// See these sources for detailed information regarding the
-// Microsoft Foundation Classes product.
-
 
 #include "stdafx.h"
 #include <afxpriv.h>
@@ -1343,41 +1333,5 @@ void CDrawView::ourTODBS()
 	ourExportDlg dlg;
 	dlg.ourCreateSQL+=sql;
 	dlg.DoModal();
-   
-	sql.Empty();
-	CDatabase db;
-	db.OpenEx("Driver=MySQL ODBC 5.1 Driver;SERVER=localhost;UID=root;PWD=890602;DATABASE=DDD;PORT=3306");
-	CDrawObjList *objList = GetDocument()->GetObjects();
-	POSITION pos = objList->GetHeadPosition();
-	CDrawRect *pRect;
-	while (pos != NULL)
-	{
-		pRect=(CDrawRect*)objList->GetNext(pos);
-		if(pRect->m_nShape==CDrawRect::rectangle)
-		{
-			pCstr=pRect->ourCreateTable();
-			if(pCstr==NULL)
-				continue;
-			sql += *pCstr;
-			db.ExecuteSQL(sql);
-			delete pCstr;
-		}
-		else if(pRect->m_nShape==CDrawRect::diamond
-				&&!(pRect->CStrLAttr.IsEmpty()))
-		{
-			pCstr=pRect->ourCreateTable();
-			if(pCstr==NULL)
-				continue;
-			sql += *pCstr;
-			db.ExecuteSQL(sql);
-			delete pCstr;
-		}
-		
-		sql.Empty();
-	}
-
-
-
-
 }
 //ZDID
