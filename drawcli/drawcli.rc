@@ -89,15 +89,17 @@ BEGIN
     EDITTEXT        IDC_EDIT4,16,21,186,55,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL
 END
 
-IDD_ABOUTBOX DIALOGEX 34, 22, 217, 55
+IDD_ABOUTBOX DIALOGEX 34, 22, 285, 81
 STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_ACCEPTFILES
 CAPTION "About E-R translate"
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
-    ICON            IDR_MAINFRAME,IDC_STATIC,13,9,21,23
+    ICON            IDR_MAINFRAME,IDC_STATIC,6,9,21,23
     LTEXT           "E-R translate Version 1.0",IDC_STATIC,43,13,119,8
-    DEFPUSHBUTTON   "OK",IDOK,177,15,32,14,WS_GROUP
-    LTEXT           "作者：三人一组（佐伦 马俊峰 姜威）",IDC_STATIC,44,24,126,8
+    DEFPUSHBUTTON   "OK",IDOK,141,49,40,17,WS_GROUP
+    CONTROL         115,IDC_STATIC,"Static",SS_BITMAP,207,6,59,65
+    LTEXT           "作者：三人一组（佐伦 马俊峰 姜威）",IDC_STATIC,41,30,132,17
 END
 
 IDD_PROP_RECT DIALOG  20, 20, 186, 93
@@ -194,6 +196,13 @@ BEGIN
         BOTTOMMARGIN, 177
     END
 
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 275
+        BOTTOMMARGIN, 74
+    END
+
     IDD_SUMM_PAGE, DIALOG
     BEGIN
         LEFTMARGIN, 7
@@ -285,6 +294,7 @@ IDR_DRAWCLTYPE          ICON                    "RES\\DRAWDOC.ICO"
 
 IDR_MAINFRAME           BITMAP                  "RES\\TOOLBAR.BMP"
 IDB_BITMAP1             BITMAP                  "RES\\logo.bmp"
+IDB_BITMAP2             BITMAP                  "RES\\balloon2.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -293,102 +303,93 @@ IDB_BITMAP1             BITMAP                  "RES\\logo.bmp"
 
 IDR_MAINFRAME MENU 
 BEGIN
-    POPUP "&File"
+    POPUP "文件(&F)"
     BEGIN
-        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
-        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "新建\tCtrl+N",                  ID_FILE_NEW
+        MENUITEM "打开\tCtrl+O",                  ID_FILE_OPEN
         MENUITEM SEPARATOR
-        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM "打印向导",                        ID_FILE_PRINT_SETUP
         MENUITEM SEPARATOR
-        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM "最近打开",                        ID_FILE_MRU_FILE1, GRAYED
         MENUITEM SEPARATOR
-        MENUITEM "E&xit",                       ID_APP_EXIT
+        MENUITEM "退出",                          ID_APP_EXIT
     END
-    POPUP "&View"
+    POPUP "视图(&V)"
     BEGIN
-        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
-        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM "工具栏(&T)",                     ID_VIEW_TOOLBAR
+        MENUITEM "状态栏(&S)",                     ID_VIEW_STATUS_BAR
     END
-    POPUP "&Help"
+    POPUP "帮助(&H)"
     BEGIN
-        MENUITEM "&About Drawcli...",           ID_APP_ABOUT
+        MENUITEM "关于E-R Translator(&A)",        ID_APP_ABOUT
     END
 END
 
 IDR_DRAWCLTYPE MENU 
 BEGIN
-    POPUP "&File"
+    POPUP "文件(&F)"
     BEGIN
-        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
-        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
-        MENUITEM "&Close",                      ID_FILE_CLOSE
-        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
-        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM "新建(&N)\tCtrl+N",              ID_FILE_NEW
+        MENUITEM "打开(&O)\tCtrl+O",              ID_FILE_OPEN
+        MENUITEM "关闭(&C)",                      ID_FILE_CLOSE
+        MENUITEM "保存(&S)\tCtrl+S",              ID_FILE_SAVE
+        MENUITEM "另存为(&A)",                     ID_FILE_SAVE_AS
         MENUITEM SEPARATOR
-        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
-        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
-        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM "打印(&P)\tCtrl+P",              ID_FILE_PRINT
+        MENUITEM "打印预览",                        ID_FILE_PRINT_PREVIEW
         MENUITEM SEPARATOR
-        MENUITEM "Sen&d...",                    ID_FILE_SEND_MAIL
-        MENUITEM "Summary &Info...",            ID_FILE_SUMMARYINFO
+        MENUITEM "发送(&D)",                      ID_FILE_SEND_MAIL
         MENUITEM SEPARATOR
-        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM "最近打开(&F)",                    ID_FILE_MRU_FILE1, GRAYED
         MENUITEM SEPARATOR
-        MENUITEM "E&xit",                       ID_APP_EXIT
+        MENUITEM "退出(&E)",                      ID_APP_EXIT
     END
-    POPUP "&Edit"
+    POPUP "编辑(&E)"
     BEGIN
-        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM "撤销(&U)\tCtrl+Z",              ID_EDIT_UNDO
         MENUITEM SEPARATOR
-        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
-        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
-        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
-        MENUITEM "&Delete\tDel",                ID_EDIT_CLEAR
-        MENUITEM "Select &All\tCtrl+A",         ID_EDIT_SELECT_ALL
-        MENUITEM "Proper&ties...\tAlt+Enter",   ID_EDIT_PROPERTIES
+        MENUITEM "剪切(&T)\tCtrl+X",              ID_EDIT_CUT
+        MENUITEM "复制(&C)\tCtrl+C",              ID_EDIT_COPY
+        MENUITEM "粘贴(&P)\tCtrl+V",              ID_EDIT_PASTE
+        MENUITEM "删除(&D)\tDel",                 ID_EDIT_CLEAR
+        MENUITEM "全选(&A)\tCtrl+A",              ID_EDIT_SELECT_ALL
         MENUITEM SEPARATOR
-        MENUITEM "Insert &New Object...",       ID_OLE_INSERT_NEW
-        MENUITEM "Lin&ks...",                   ID_OLE_EDIT_LINKS
-        MENUITEM "<<OLE VERBS GO HERE>>",       ID_OLE_VERB_FIRST
     END
-    POPUP "&View"
+    POPUP "视图(&V)"
     BEGIN
-        MENUITEM "&Grid Lines\tG",              ID_VIEW_GRID
-        MENUITEM "&Paper Color...",             ID_VIEW_PAPERCOLOR
-        MENUITEM "Show &Objects",               ID_VIEW_SHOWOBJECTS
+        MENUITEM "表格线(&G)",                     ID_VIEW_GRID
+        MENUITEM "背景色(&P)",                     ID_VIEW_PAPERCOLOR
+        MENUITEM "显示目标(&O)",                    ID_VIEW_SHOWOBJECTS
         MENUITEM SEPARATOR
-        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
-        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM "工具栏(&T)",                     ID_VIEW_TOOLBAR
+        MENUITEM "状态栏(&S)",                     ID_VIEW_STATUS_BAR
     END
-    POPUP "&Draw"
+    POPUP "绘图"
     BEGIN
-        MENUITEM "&Select",                     ID_DRAW_SELECT
-        MENUITEM "&Line",                       ID_DRAW_LINE
-        MENUITEM "&Rectangle",                  ID_DRAW_RECT
-        MENUITEM "R&ound Rectangle",            ID_DRAW_ROUNDRECT
-        MENUITEM "&Ellipse",                    ID_DRAW_ELLIPSE
-        MENUITEM "&Polygon",                    ID_DRAW_POLYGON
+        MENUITEM "选择(&S)",                      ID_DRAW_SELECT
+        MENUITEM "直线(&L)",                      ID_DRAW_LINE
+        MENUITEM "实体(&R)",                      ID_DRAW_RECT
+        MENUITEM "关系(&o)",                      ID_DRAW_ROUNDRECT
+        MENUITEM "属性(&E)",                      ID_DRAW_ELLIPSE
     END
-    POPUP "&Object"
+    POPUP "对象"
     BEGIN
-        MENUITEM "&Line Color...",              ID_OBJECT_LINECOLOR
-        MENUITEM "&Fill Color...",              ID_OBJECT_FILLCOLOR
+        MENUITEM "边框颜色(&L)",                    ID_OBJECT_LINECOLOR
+        MENUITEM "填充色(&F)",                     ID_OBJECT_FILLCOLOR
         MENUITEM SEPARATOR
-        MENUITEM "Move To Front\tCtrl+Plus",    ID_OBJECT_MOVETOFRONT
-        MENUITEM "Move To Back\tCtrl+Minus",    ID_OBJECT_MOVETOBACK
-        MENUITEM "Move Forward\tPlus",          ID_OBJECT_MOVEFORWARD
-        MENUITEM "Move Back\tMinus",            ID_OBJECT_MOVEBACK
+        MENUITEM "移到前面\tCtrl+Plus",             ID_OBJECT_MOVETOFRONT
+        MENUITEM "移到后面\tCtrl+Minus",            ID_OBJECT_MOVETOBACK
+        MENUITEM "向前\tPlus",                    ID_OBJECT_MOVEFORWARD
+        MENUITEM "向后\tMinus",                   ID_OBJECT_MOVEBACK
     END
-    POPUP "&Window"
+    POPUP "窗口"
     BEGIN
-        MENUITEM "&New Window",                 ID_WINDOW_NEW
-        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
-        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
-        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+        MENUITEM "新窗口(&N)",                     ID_WINDOW_NEW
+        MENUITEM "重排图标(&A)",                    ID_WINDOW_ARRANGE
     END
-    POPUP "&Help"
+    POPUP "帮助"
     BEGIN
-        MENUITEM "&About Drawcli...",           ID_APP_ABOUT
+        MENUITEM "关于E-R Translator",            ID_APP_ABOUT
     END
 END
 
@@ -427,12 +428,11 @@ ID_POPUP_MENU MENU
 BEGIN
     POPUP ""
     BEGIN
-        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
-        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
-        MENUITEM "&Delete\tDel",                ID_EDIT_CLEAR
-        MENUITEM "Proper&ties...\tAlt+Enter",   ID_EDIT_PROPERTIES
+        MENUITEM "剪切\tCtrl+X",                  ID_EDIT_CUT
+        MENUITEM "复制\tCtrl+C",                  ID_EDIT_COPY
+        MENUITEM "删除\tDel",                     ID_EDIT_CLEAR
+        MENUITEM "属性(&t)\tAlt+Enter",           ID_EDIT_PROPERTIES
         MENUITEM SEPARATOR
-        MENUITEM "<<OLE VERBS GO HERE>>",       ID_OLE_VERB_FIRST
     END
 END
 
