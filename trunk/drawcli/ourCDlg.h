@@ -1,5 +1,6 @@
 #pragma once
 #include "afxwin.h"
+#include "afxcmn.h"
 //#include "drawobj.h"
 
 class CDrawRect;
@@ -98,4 +99,22 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CString ourCreateSQL;
+	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedButton2();
+
+public:
+	int ourDBPort;
+public:
+	CString ourLinkDB;
+public:
+	CString ourDBpw;
+public:
+	CString ourDBUserName;
+public:
+	CIPAddressCtrl ourIPCtrl;
+public:
+	DWORD IP;
 };
+
+
+
