@@ -29,6 +29,7 @@
 #define IDC_REVNUM                      112
 #define IDD_EXPORT_DIALOG               112
 #define IDC_EDITTIME                    113
+#define IDB_BITMAP1                     113
 #define IDC_LASTPRINT                   114
 #define IDC_CREATEDATE                  115
 #define IDC_LASTSAVE                    116
@@ -71,13 +72,16 @@
 #define ID_BUTTON32810                  -32726
 #define ID_BUTTON32811                  -32725
 #define ID_TODBS                        32814
+#define ID_EDIT_CUT1                    32815
+#define ID_EDIT_COPY1                   32816
+#define ID_EDIT_PASTE1                  32817
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        112
-#define _APS_NEXT_COMMAND_VALUE         32815
+#define _APS_NEXT_RESOURCE_VALUE        114
+#define _APS_NEXT_COMMAND_VALUE         32818
 #define _APS_NEXT_CONTROL_VALUE         139
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
