@@ -42,12 +42,12 @@
 
 #define APP_NAME                "Drawing Client"
 #define PROGRAM_GROUP_NAME      "YourCompany Applications"
-#define APPBASE_PATH            "YourCompany\\E-R translate\\"
+#define APPBASE_PATH            "YourCompany\\E-R Translator\\"
 #define COMPANY_NAME            "YourCompany"
 #define PRODUCT_NAME            "Drawing Client"
 #define PRODUCT_VERSION         "2.0"
-#define PRODUCT_KEY             "E-R translate.exe"
-#define UNINSTALL_KEY           "E-R translateV3"
+#define PRODUCT_KEY             "E-R Translator.exe"
+#define UNINSTALL_KEY           "E-R TranslatorV3"
 #define APPBASE_DIR95           "Program Files"
 #define BASE_REGISTRYNT         "Software\\Microsoft\\Windows NT\\CurrentVersion\\App Paths\\"
 #define BASE_REGISTRY95         "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\"
@@ -178,7 +178,7 @@ FileTransferSetup:
         // Set registry App Paths key information for the main application.
         szAppPath = svMainDirectory ^ "PROGRAM" + ";" + szAppSharedDir;
         RegDBSetItem( REGDB_APPPATH, szAppPath );
-        szProgram = svMainDirectory ^ "PROGRAM\\E-R translate.exe";
+        szProgram = svMainDirectory ^ "PROGRAM\\E-R Translator.exe";
         RegDBSetItem( REGDB_APPPATH_DEFAULT, szProgram );
 
         // Define the "General" file set.
@@ -269,7 +269,7 @@ CreateFolderIcons:
         TARGETDIR = svMainDirectory;
 
         if (bIncludeProgram) then
-           szProgram = TARGETDIR ^ "PROGRAM\\E-R translate.EXE";
+           szProgram = TARGETDIR ^ "PROGRAM\\E-R Translator.EXE";
            if ( bWinNT ) then
               AddFolderIcon( svGrp, APP_NAME, szProgram,
                              TARGETDIR ^ "PROGRAM",
@@ -285,9 +285,9 @@ CreateFolderIcons:
 
         if ( bWinNT ) then
            if (bIncludeSamples) then
-              szProgram = TARGETDIR ^ "PROGRAM\\E-R translate.EXE ";
+              szProgram = TARGETDIR ^ "PROGRAM\\E-R Translator.EXE ";
               AddFolderIcon( svGrp, "Example1",
-                             szProgram + TARGETDIR ^ "SAMPLES\\E-Rtranslate1.DRW",
+                             szProgram + TARGETDIR ^ "SAMPLES\\E-RTranslator1.DRW",
                              TARGETDIR ^ "SAMPLES",
                              szProgram, 1, "", REPLACE );
               Delay( 1 );
@@ -489,7 +489,7 @@ begin
 
         // Create PRODUCT_KEY key.
         szKey = "SOFTWARE\\" + COMPANY_NAME + "\\" + PRODUCT_NAME + "\\" +
-                PRODUCT_VERSION + "\\" + "E-R translate";
+                PRODUCT_VERSION + "\\" + "E-R Translator";
         RegDBCreateKeyEx( szKey, "" );
 
         // The following keys are duplicates of ones that the MFC library

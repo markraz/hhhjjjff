@@ -52,6 +52,7 @@
 #define IDC_IPADDRESS1                  136
 #define IDC_EDIT4                       137
 #define IDC_RICHEDIT21                  138
+#define IDC_EDIT5                       141
 #define ID_CANCEL_EDIT                  32768
 #define ID_VIEW_GRID                    32769
 #define ID_DRAW_SELECT                  32770
@@ -84,7 +85,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        116
 #define _APS_NEXT_COMMAND_VALUE         32819
-#define _APS_NEXT_CONTROL_VALUE         141
+#define _APS_NEXT_CONTROL_VALUE         142
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
