@@ -79,7 +79,7 @@
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="false"
 				AdditionalOptions="/SAFESEH"
-				OutputFile="$(OutDir)\E-R translate.exe"
+				OutputFile="$(OutDir)\E-R Translator.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="false"
 				SubSystem="2"
