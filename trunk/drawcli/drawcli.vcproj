@@ -70,7 +70,7 @@
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_AFXDLL;NDEBUG"
-				Culture="1033"
+				Culture="2052"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -79,6 +79,7 @@
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="false"
 				AdditionalOptions="/SAFESEH"
+				OutputFile="$(OutDir)\E-R translate.exe"
 				LinkIncremental="1"
 				SuppressStartupBanner="false"
 				SubSystem="2"
@@ -157,7 +158,7 @@
 			<Tool
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_AFXDLL;_DEBUG"
-				Culture="1033"
+				Culture="2052"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
@@ -1375,6 +1376,10 @@
 			</File>
 			<File
 				RelativePath="res\drawdoc.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\RES\logo.bmp"
 				>
 			</File>
 			<File

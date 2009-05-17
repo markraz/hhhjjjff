@@ -456,6 +456,20 @@ void CDrawView::DrawGrid(CDC* pDC)
 
 	pDC->SelectObject(pOldPen);
 	pDC->SetBkColor(oldBkColor);
+
+	///////////////////////////////////////////////
+	//ZDOÌí¼Ó±ÈÈülogo
+	CBitmap Bitmap,*pOldBitmap;
+	BITMAP bm;
+	CDC MemDC;
+	Bitmap.LoadBitmapA(IDB_BITMAP1);
+	Bitmap.GetObject(sizeof(BITMAP),&bm);
+	MemDC.CreateCompatibleDC(pDC);
+	pOldBitmap=(CBitmap*)MemDC.SelectObject(&Bitmap);
+	pDC->StretchBlt(370,380,bm.bmWidth,bm.bmHeight,&MemDC,0,170,bm.bmWidth,-bm.bmHeight,SRCCOPY);
+	MemDC.SelectObject(pOldBitmap);
+	//ZDID
+	///////////////////////////////////////////////
 }
 
 void CDrawView::OnInitialUpdate()

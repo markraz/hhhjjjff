@@ -42,12 +42,12 @@
 
 #define APP_NAME                "Drawing Client"
 #define PROGRAM_GROUP_NAME      "YourCompany Applications"
-#define APPBASE_PATH            "YourCompany\\DrawCli\\"
+#define APPBASE_PATH            "YourCompany\\E-R translate\\"
 #define COMPANY_NAME            "YourCompany"
 #define PRODUCT_NAME            "Drawing Client"
 #define PRODUCT_VERSION         "2.0"
-#define PRODUCT_KEY             "drawcli.exe"
-#define UNINSTALL_KEY           "DrawCliV3"
+#define PRODUCT_KEY             "E-R translate.exe"
+#define UNINSTALL_KEY           "E-R translateV3"
 #define APPBASE_DIR95           "Program Files"
 #define BASE_REGISTRYNT         "Software\\Microsoft\\Windows NT\\CurrentVersion\\App Paths\\"
 #define BASE_REGISTRY95         "Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\"
@@ -178,7 +178,7 @@ FileTransferSetup:
         // Set registry App Paths key information for the main application.
         szAppPath = svMainDirectory ^ "PROGRAM" + ";" + szAppSharedDir;
         RegDBSetItem( REGDB_APPPATH, szAppPath );
-        szProgram = svMainDirectory ^ "PROGRAM\\drawcli.exe";
+        szProgram = svMainDirectory ^ "PROGRAM\\E-R translate.exe";
         RegDBSetItem( REGDB_APPPATH_DEFAULT, szProgram );
 
         // Define the "General" file set.
@@ -269,7 +269,7 @@ CreateFolderIcons:
         TARGETDIR = svMainDirectory;
 
         if (bIncludeProgram) then
-           szProgram = TARGETDIR ^ "PROGRAM\\DRAWCLI.EXE";
+           szProgram = TARGETDIR ^ "PROGRAM\\E-R translate.EXE";
            if ( bWinNT ) then
               AddFolderIcon( svGrp, APP_NAME, szProgram,
                              TARGETDIR ^ "PROGRAM",
@@ -285,9 +285,9 @@ CreateFolderIcons:
 
         if ( bWinNT ) then
            if (bIncludeSamples) then
-              szProgram = TARGETDIR ^ "PROGRAM\\DRAWCLI.EXE ";
+              szProgram = TARGETDIR ^ "PROGRAM\\E-R translate.EXE ";
               AddFolderIcon( svGrp, "Example1",
-                             szProgram + TARGETDIR ^ "SAMPLES\\DRAWCLI1.DRW",
+                             szProgram + TARGETDIR ^ "SAMPLES\\E-Rtranslate1.DRW",
                              TARGETDIR ^ "SAMPLES",
                              szProgram, 1, "", REPLACE );
               Delay( 1 );
@@ -489,7 +489,7 @@ begin
 
         // Create PRODUCT_KEY key.
         szKey = "SOFTWARE\\" + COMPANY_NAME + "\\" + PRODUCT_NAME + "\\" +
-                PRODUCT_VERSION + "\\" + "DRAWCLI";
+                PRODUCT_VERSION + "\\" + "E-R translate";
         RegDBCreateKeyEx( szKey, "" );
 
         // The following keys are duplicates of ones that the MFC library
@@ -504,11 +504,11 @@ begin
         // create keys used by CWinApp::EnableShellFileTypes
         RegDBSetDefaultRoot( HKEY_CLASSES_ROOT );
         RegDBCreateKeyEx( ".DRW", "" );
-        RegDBCreateKeyEx( "DrawCl.Document", "" );
+        RegDBCreateKeyEx( "Draw.Document", "" );
 
         // register filetype icon
-        RegDBCreateKeyEx( "DrawCl.Document\\DefaultIcon", "" );
-        RegDBSetKeyValueEx( "DrawCl.Document\\DefaultIcon", 
+        RegDBCreateKeyEx( "Draw.Document\\DefaultIcon", "" );
+        RegDBSetKeyValueEx( "Draw.Document\\DefaultIcon", 
                             "", REGDB_STRING, APPBASE_DIR95 + "\\" +
                             APPBASE_PATH + "\\PROGRAM\\" + PRODUCT_KEY + ",1", -1 );
 end;

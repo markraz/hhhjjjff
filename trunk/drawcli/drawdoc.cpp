@@ -83,7 +83,7 @@ BOOL CDrawDoc::OnNewDocument()
 	m_pSummInfo->RecordCreateDate();
 	m_pSummInfo->SetNumPages(1);
 	// NumWords, NumChars default to 0
-	m_pSummInfo->SetAppname( _T("DrawCli") );
+	m_pSummInfo->SetAppname( _T("E-R translate") );
 	// Security defaults to 0
 	return TRUE;
 }
