@@ -1363,6 +1363,10 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;cnt;rtf;gif;jpg;jpeg;jpe"
 			>
 			<File
+				RelativePath=".\RES\balloon2.bmp"
+				>
+			</File>
+			<File
 				RelativePath="res\drawcli.ico"
 				>
 			</File>
