@@ -557,10 +557,10 @@ void CDrawRect::OnOpen(CDrawView* pView)
 		}
 		else if(!(this->CStrLAttr.IsEmpty()))
 		{
-			pos = pDlg->pRectLeft->myRelation.Find((CObject *)&(pDlg->pRectRight));
-			pDlg->pRectLeft->myRelation.RemoveAt(pos);
-			pos = pDlg->pRectRight->myRelation.Find((CObject *)&(pDlg->pRectLeft));
-			pDlg->pRectRight->myRelation.RemoveAt(pos);
+			pos = relationToEntry[0]->myRelation.Find((CObject *)relationToEntry[1]);
+			relationToEntry[0]->myRelation.RemoveAt(pos);
+			pos = relationToEntry[1]->myRelation.Find((CObject *)relationToEntry[0]);
+			relationToEntry[1]->myRelation.RemoveAt(pos);
 
 		}
 			Invalidate();
@@ -611,9 +611,10 @@ CString* CDrawRect::ourCreateTable()
 {
 	//对于关系在调用此函数之前用关系是否有变量来区分调用与否
 	bool flag = true;
-	CString &sql=*(new CString ("create table "+ourObjName+"( ID int,"));
+	CString &sql=*(new CString ("create table "+ourObjName+"( "));
 	if(this->m_nShape==rectangle)
 	{
+		sql+="ID int NOT NULL AUTO_INCREMENT,";
 		CString tempName,tempType;
 		POSITION pos=CStrLAttr.GetHeadPosition();
 		int iIndex;
@@ -667,12 +668,14 @@ CString* CDrawRect::ourCreateTable()
 				tempName.Empty();
 				tempType.Empty();
 			}
-			sql+="primary key(ID)";
+			//sql+="primary key(ID)";
 			int i=0,rTE_Length=2;
 			for(;i<rTE_Length;i++)
 			{
-				sql+=",foreign key (ID) references "+relationToEntry[i]->ourObjName+"(ID)";
+				sql+=relationToEntry[i]->ourObjName+"_ID int NOT NULL,";
+				sql+="foreign key ("+relationToEntry[i]->ourObjName+"_ID) references "+relationToEntry[i]->ourObjName+"(ID),";
 			}
+			sql.Delete(sql.GetLength()-1,1);//删除多打的一个逗号
 			sql+="); ";
 		}
 
@@ -733,6 +736,7 @@ void CDrawRect::Draw(CDC* pDC)
 
 	CString strToShow;//ZDO
 	CRect rect = m_position;
+	int textX=rect.right+10,textY=rect.CenterPoint().y+10;
 	switch (m_nShape)
 	{
 	case rectangle:
@@ -743,6 +747,7 @@ void CDrawRect::Draw(CDC* pDC)
 	case diamond:
 		ourDiamond(rect,pDC);
 		strToShow = ourObjName;//ZDO
+		textX+=13;
 		break;
 
 	case ellipse:
@@ -782,7 +787,7 @@ void CDrawRect::Draw(CDC* pDC)
 	pDC->SelectObject(pOldBrush);
 	pDC->SelectObject(pOldPen);
 
-	pDC->TextOut(rect.right+5,rect.CenterPoint().y+10,strToShow);//ZDO
+	pDC->TextOut(textX,textY,strToShow);//ZDO
 }
 
 

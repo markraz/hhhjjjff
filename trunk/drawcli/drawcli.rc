@@ -84,7 +84,7 @@ BEGIN
     EDITTEXT        IDC_EDIT3,154,130,51,14,ES_PASSWORD | ES_AUTOHSCROLL
     LTEXT           "数据库IP：",IDC_STATIC,14,89,40,8
     CONTROL         "",IDC_IPADDRESS1,"SysIPAddress32",WS_TABSTOP,53,86,66,15
-    LTEXT           "SQL语句：",IDC_STATIC,19,11,38,8
+    LTEXT           "SQL语句：（所有实体默认生成ID属性用于关联）",IDC_STATIC,19,11,173,8
     PUSHBUTTON      "测试连接",IDC_BUTTON2,115,156,50,14
     EDITTEXT        IDC_EDIT4,16,21,186,55,ES_MULTILINE | ES_AUTOVSCROLL | ES_WANTRETURN | WS_VSCROLL
     LTEXT           "数据库：",IDC_STATIC,120,111,32,8
@@ -583,7 +583,7 @@ END
 STRINGTABLE 
 BEGIN
     IDR_MAINFRAME           "E-R Translator Application"
-    IDR_DRAWCLTYPE          "\nE-R Translator\nE-R Translator Document\nE-R Translator Files (*.drw)\n.drw\nE-R Translator.Document\nE-R Translator Document\nER\nE-R Translator Files"
+    IDR_DRAWCLTYPE          "\nE-R_Translator\nE-R Translator Document\nE-R Translator Files (*.drw)\n.drw\nE-R_Translator.Document\nE-R Translator Document\nER\nE-R Translator Files"
 END
 
 STRINGTABLE 

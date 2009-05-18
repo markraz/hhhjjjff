@@ -1,7 +1,6 @@
 #pragma once
 #include "afxwin.h"
 #include "afxcmn.h"
-//#include "drawobj.h"
 
 class CDrawRect;
 // ourCEntryDlg ¶Ô»°¿ò
