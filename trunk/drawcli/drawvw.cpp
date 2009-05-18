@@ -456,7 +456,7 @@ void CDrawView::DrawGrid(CDC* pDC)
 	Bitmap.GetObject(sizeof(BITMAP),&bm);
 	MemDC.CreateCompatibleDC(pDC);
 	pOldBitmap=(CBitmap*)MemDC.SelectObject(&Bitmap);
-	pDC->StretchBlt(370,380,bm.bmWidth,bm.bmHeight,&MemDC,0,170,bm.bmWidth,-bm.bmHeight,SRCCOPY);
+	pDC->StretchBlt(410,380,bm.bmWidth,bm.bmHeight,&MemDC,0,170,bm.bmWidth,-bm.bmHeight,SRCCOPY);
 	MemDC.SelectObject(pOldBitmap);
 	//ZDID
 	///////////////////////////////////////////////
