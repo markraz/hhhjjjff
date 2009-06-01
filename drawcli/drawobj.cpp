@@ -453,12 +453,18 @@ void CDrawRect::Serialize(CArchive& ar)
 	{
 		ar << (WORD) m_nShape;
 		ar << m_roundness;
+		myRelation.Serialize(ar);
+		ar << relationToEntry[0];
+		ar << relationToEntry[1];
 	}
 	else
 	{
 		WORD wTemp;
 		ar >> wTemp; m_nShape = (Shape)wTemp;
 		ar >> m_roundness;
+		myRelation.Serialize(ar);
+		ar >> relationToEntry[0];
+		ar >> relationToEntry[1];
 	}
 }
 //ZDO
