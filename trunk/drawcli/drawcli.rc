@@ -340,7 +340,7 @@ BEGIN
         MENUITEM "打印(&P)\tCtrl+P",              ID_FILE_PRINT
         MENUITEM "打印预览",                        ID_FILE_PRINT_PREVIEW
         MENUITEM SEPARATOR
-        MENUITEM "发送(&D)",                      ID_FILE_SEND_MAIL
+        MENUITEM "摘要(&I)",                      ID_FILE_SUMMARYINFO
         MENUITEM SEPARATOR
         MENUITEM "最近打开(&F)",                    ID_FILE_MRU_FILE1, GRAYED
         MENUITEM SEPARATOR
@@ -710,8 +710,8 @@ BEGIN
     ID_VIEW_GRID            "Show or hide gridlines\nToggle Gridlines"
     ID_DRAW_SELECT          "Choose object selection tool\nSelection Tool"
     ID_DRAW_LINE            "Choose line drawing tool\nLine Tool"
-    ID_DRAW_RECT            "Choose rectangle drawing tool\nRectangle Tool"
-    ID_DRAW_ROUNDRECT       "Choose rounded rectangle drawing tool\nRoundRect Tool"
+    ID_DRAW_RECT            "Choose entry drawing tool\nEntry Tool"
+    ID_DRAW_ROUNDRECT       "Choose relationship drawing tool\nRelationship Tool"
     ID_DRAW_ELLIPSE         "Choose ellipse drawing tool\nEllipse Tool"
     ID_OBJECT_LINECOLOR     "Change the line or text color\nLine Color"
     ID_OBJECT_FILLCOLOR     "Change the fill or background color\nFill Color"
@@ -727,7 +727,7 @@ STRINGTABLE
 BEGIN
     ID_VIEW_SHOWOBJECTS     "Toggle OLE object indication"
     ID_EDIT_PROPERTIES      "Edit drawing object properties"
-    ID_FILE_SUMMARYINFO     "Display summary information"
+    ID_FILE_SUMMARYINFO     "显示摘要信息"
 END
 
 #endif    // 中文(中华人民共和国) resources

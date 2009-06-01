@@ -84,8 +84,16 @@ void ourCEntryDlg::OnBnClickedButton2()
 	int iIndex=ourCLBCtrl.GetCurSel();
 	if(iIndex<0)
 		return;
-	ourCLBCtrl.DeleteString(iIndex);
-	CStrLAttr.RemoveAt(CStrLAttr.FindIndex(iIndex));
+	POSITION pos=CStrLAttr.FindIndex(iIndex);
+	if(pos!=NULL)
+	{
+		ourCLBCtrl.DeleteString(iIndex);
+		CStrLAttr.RemoveAt(pos);
+	}
+	else
+	{
+		MessageBox("不能删除已绘制的图形");
+	}
 }
 
 
@@ -174,8 +182,17 @@ void ourCRelationDlg::OnBnClickedButton2()
 	int iIndex=ourCLBCtrl.GetCurSel();
 	if(iIndex<0)
 		return;
-	ourCLBCtrl.DeleteString(iIndex);
-	CStrLAttr.RemoveAt(CStrLAttr.FindIndex(iIndex));
+
+	POSITION pos=CStrLAttr.FindIndex(iIndex);
+	if(pos!=NULL)
+	{
+		ourCLBCtrl.DeleteString(iIndex);
+		CStrLAttr.RemoveAt(pos);
+	}
+	else
+	{
+		MessageBox("不能删除已绘制的图形");
+	}
 }
 
 void ourCRelationDlg::OnBnClickedOk()
