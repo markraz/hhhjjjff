@@ -589,7 +589,7 @@ END
 STRINGTABLE 
 BEGIN
     AFX_IDS_APP_TITLE       "E-R Translator  Application"
-    AFX_IDS_IDLEMESSAGE     "Ready"
+    AFX_IDS_IDLEMESSAGE     "就绪"
 END
 
 STRINGTABLE 
@@ -604,128 +604,128 @@ END
 
 STRINGTABLE 
 BEGIN
-    ID_FILE_NEW             "Create a new document\nNew"
-    ID_FILE_OPEN            "Open an existing document\nOpen"
-    ID_FILE_CLOSE           "Close the active document\nClose"
-    ID_FILE_SAVE            "Save the active document\nSave"
-    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
-    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
-    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
-    ID_FILE_PRINT           "Print the active document\nPrint"
-    ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
-    ID_FILE_SEND_MAIL       "Send the active document through electronic mail\nSend Mail"
+    ID_FILE_NEW             "创建新的文档\n新建"
+    ID_FILE_OPEN            "打开已存在文档\n打开"
+    ID_FILE_CLOSE           "关闭正运行的文件\n关闭"
+    ID_FILE_SAVE            "保存正运行的文件\n保存"
+    ID_FILE_SAVE_AS         "以新文件保存正运行的文件\n另存为"
+    ID_FILE_PAGE_SETUP      "改变打印选项\n页面设置"
+    ID_FILE_PRINT_SETUP     "改变打印机\n打印安装"
+    ID_FILE_PRINT           "打印正运行的文件\n打印"
+    ID_FILE_PRINT_PREVIEW   "显示整个页面\n打印预览"
+    ID_FILE_SEND_MAIL       "电子邮件发送正运行的文件\n发送邮件"
 END
 
 STRINGTABLE 
 BEGIN
-    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
-    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
-    ID_CONTEXT_HELP         "Display help for clicked-on buttons, menus and windows\nHelp mode"
+    ID_APP_ABOUT            "显示程序信息，版本号和版权\n关于"
+    ID_APP_EXIT             "退出应用程序;提示保存文档\n退出"
+    ID_CONTEXT_HELP         "为点击按钮，菜单和窗口提供帮助\n帮助模式"
 END
 
 STRINGTABLE 
 BEGIN
-    ID_FILE_MRU_FILE1       "Open this document"
-    ID_FILE_MRU_FILE2       "Open this document"
-    ID_FILE_MRU_FILE3       "Open this document"
-    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE1       "打开这个文档"
+    ID_FILE_MRU_FILE2       "打开这个文档"
+    ID_FILE_MRU_FILE3       "打开这个文档"
+    ID_FILE_MRU_FILE4       "打开这个文档"
 END
 
 STRINGTABLE 
 BEGIN
-    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
-    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+    ID_NEXT_PANE            "转换到下一个界面\n下一个界面"
+    ID_PREV_PANE            "转换到上一个界面\n先前的界面"
 END
 
 STRINGTABLE 
 BEGIN
-    ID_WINDOW_NEW           "Open another window for the active document\nNew Window"
-    ID_WINDOW_ARRANGE       "Arrange icons at the bottom of the window\nArrange Icons"
-    ID_WINDOW_CASCADE       "Arrange windows so they overlap\nCascade Windows"
-    ID_WINDOW_TILE_HORZ     "Arrange windows as non-overlapping tiles\nTile Windows"
-    ID_WINDOW_TILE_VERT     "Arrange windows as non-overlapping tiles\nTile Windows"
-    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+    ID_WINDOW_NEW           "打开另一个活动窗口\n新窗口"
+    ID_WINDOW_ARRANGE       "排列窗口底部图标\n排列图标"
+    ID_WINDOW_CASCADE       "重新排列窗口使它们重叠\n串联排列窗口"
+    ID_WINDOW_TILE_HORZ     "重新排列窗口使它们不重叠\n排列窗口"
+    ID_WINDOW_TILE_VERT     "重新排列窗口使它们不重叠\n排列窗口"
+    ID_WINDOW_SPLIT         "分裂平铺窗口\n分离"
 END
 
 STRINGTABLE 
 BEGIN
-    ID_EDIT_CLEAR           "Erase the selection\nErase"
-    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
-    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
-    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
-    ID_EDIT_FIND            "Find the specified text\nFind"
-    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
-    ID_EDIT_PASTE_LINK      "Insert Clipboard contents and a link to its source\nPaste Link"
-    ID_EDIT_PASTE_SPECIAL   "Insert Clipboard contents with options\nPaste Special"
-    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
-    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
-    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
-    ID_EDIT_UNDO            "Undo the last action\nUndo"
-    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+    ID_EDIT_CLEAR           "删除选择\n删除"
+    ID_EDIT_CLEAR_ALL       "删除所有\n删除所有"
+    ID_EDIT_COPY            "复制选择并放至剪切板\n复制"
+    ID_EDIT_CUT             "剪切选择并放至剪切板\n剪切"
+    ID_EDIT_FIND            "查找指定文本\n查找"
+    ID_EDIT_PASTE           "插入剪切板内的内容\n粘贴"
+    ID_EDIT_PASTE_LINK      "插入剪切板内的内容并显示链接\n复制链接"
+    ID_EDIT_PASTE_SPECIAL   "通过选择插入剪切板内容\n选择粘贴"
+    ID_EDIT_REPEAT          "重复最后动作\n重复"
+    ID_EDIT_REPLACE         "用不同文本替换选择文本\n替换"
+    ID_EDIT_SELECT_ALL      "选择全部内容\n全选"
+    ID_EDIT_UNDO            "取消最后操作\n撤销"
+    ID_EDIT_REDO            "重做先前撤销的操作\n前进"
 END
 
 STRINGTABLE 
 BEGIN
-    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
-    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+    ID_VIEW_TOOLBAR         "显示或隐藏工具栏\n切换工具栏"
+    ID_VIEW_STATUS_BAR      "显示或隐藏状态栏\n切换状态栏"
 END
 
 STRINGTABLE 
 BEGIN
-    ID_OLE_INSERT_NEW       "Insert new linked or embedded object\nNew Object"
-    ID_OLE_EDIT_LINKS       "Edit linked objects\nEdit Links"
-    ID_OLE_EDIT_CONVERT     "Convert object to different type\nConvert Object"
+    ID_OLE_INSERT_NEW       "插入新的链接或嵌入对象\n新对象"
+    ID_OLE_EDIT_LINKS       "编辑链接对象\n编辑链接"
+    ID_OLE_EDIT_CONVERT     "转换对象至另一个类型\n转换对象"
 END
 
 STRINGTABLE 
 BEGIN
-    ID_OLE_VERB_FIRST       "Activate embedded or linked object"
+    ID_OLE_VERB_FIRST       "激活嵌入或链接对象"
 END
 
 STRINGTABLE 
 BEGIN
-    AFX_IDS_SCSIZE          "Change the window size"
-    AFX_IDS_SCMOVE          "Change the window position"
-    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
-    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
-    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
-    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
-    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+    AFX_IDS_SCSIZE          "改变窗口尺寸"
+    AFX_IDS_SCMOVE          "改变窗口位置"
+    AFX_IDS_SCMINIMIZE      "减小窗口至一个按钮"
+    AFX_IDS_SCMAXIMIZE      "扩大窗口至全屏尺寸"
+    AFX_IDS_SCNEXTWINDOW    "转换至下一个文件窗口"
+    AFX_IDS_SCPREVWINDOW    "转换至先前的文件窗口"
+    AFX_IDS_SCCLOSE         "关闭活动窗口并提示保存文件"
 END
 
 STRINGTABLE 
 BEGIN
-    AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+    AFX_IDS_PREVIEW_CLOSE   "关闭打印预览模式\n取消预览"
 END
 
 STRINGTABLE 
 BEGIN
-    AFX_IDS_SCRESTORE       "Restore the window to normal size"
-    AFX_IDS_SCTASKLIST      "Activate Task List"
-    AFX_IDS_MDICHILD        "Activate this window"
+    AFX_IDS_SCRESTORE       "恢复窗口至适当尺寸"
+    AFX_IDS_SCTASKLIST      "打开任务列表"
+    AFX_IDS_MDICHILD        "打开这个窗口"
 END
 
 STRINGTABLE 
 BEGIN
-    ID_VIEW_GRID            "Show or hide gridlines\nToggle Gridlines"
-    ID_DRAW_SELECT          "Choose object selection tool\nSelection Tool"
-    ID_DRAW_LINE            "Choose line drawing tool\nLine Tool"
-    ID_DRAW_RECT            "Choose entry drawing tool\nEntry Tool"
-    ID_DRAW_ROUNDRECT       "Choose relationship drawing tool\nRelationship Tool"
-    ID_DRAW_ELLIPSE         "Choose ellipse drawing tool\nEllipse Tool"
-    ID_OBJECT_LINECOLOR     "Change the line or text color\nLine Color"
-    ID_OBJECT_FILLCOLOR     "Change the fill or background color\nFill Color"
-    ID_OBJECT_MOVETOFRONT   "Move object to front of drawing"
-    ID_OBJECT_MOVETOBACK    "Move object to back of drawing"
-    ID_OBJECT_MOVEFORWARD   "Move object to next position in z-order"
-    ID_OBJECT_MOVEBACK      "Move object to previous position in z-order"
-    ID_VIEW_PAPERCOLOR      "Change paper color displayed while editing"
+    ID_VIEW_GRID            "显示或隐藏网格线\n切换网格"
+    ID_DRAW_SELECT          "选择对象选项工具\n选择按钮"
+    ID_DRAW_LINE            "选择画直线工具\n直线按钮"
+    ID_DRAW_RECT            "选择画实体工具\n实体按钮"
+    ID_DRAW_ROUNDRECT       "选择画关系工具\n关系按钮"
+    ID_DRAW_ELLIPSE         "选择画属性工具\n属性按钮"
+    ID_OBJECT_LINECOLOR     "改变网格和文本颜色\n线条颜色"
+    ID_OBJECT_FILLCOLOR     "改变背景填充颜色\n填充色"
+    ID_OBJECT_MOVETOFRONT   "移动对象至图像前面"
+    ID_OBJECT_MOVETOBACK    "移动对象至图像前面"
+    ID_OBJECT_MOVEFORWARD   "移动对象至下一个位置"
+    ID_OBJECT_MOVEBACK      "移动对象至先前的位置"
+    ID_VIEW_PAPERCOLOR      "改变编辑时纸张颜色显示"
     ID_DRAW_POLYGON         "Choose the polygon drawing tool\nPolygon Tool"
 END
 
 STRINGTABLE 
 BEGIN
-    ID_VIEW_SHOWOBJECTS     "Toggle OLE object indication"
+    ID_VIEW_SHOWOBJECTS     "显示所画对象"
     ID_EDIT_PROPERTIES      "Edit drawing object properties"
     ID_FILE_SUMMARYINFO     "显示摘要信息"
 END

@@ -555,9 +555,11 @@ void CDrawRect::OnOpen(CDrawView* pView)
 		else if(!(this->CStrLAttr.IsEmpty()))
 		{
 			pos = relationToEntry[0]->myRelation.Find((CObject *)relationToEntry[1]);
-			relationToEntry[0]->myRelation.RemoveAt(pos);
+			if(pos!=NULL)
+				relationToEntry[0]->myRelation.RemoveAt(pos);
 			pos = relationToEntry[1]->myRelation.Find((CObject *)relationToEntry[0]);
-			relationToEntry[1]->myRelation.RemoveAt(pos);
+			if(pos!=NULL)
+				relationToEntry[1]->myRelation.RemoveAt(pos);
 
 		}
 			Invalidate();
