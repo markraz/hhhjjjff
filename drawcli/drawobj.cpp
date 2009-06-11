@@ -740,6 +740,7 @@ void CDrawRect::Draw(CDC* pDC)
 	{
 	case rectangle:
 		pDC->Rectangle(rect);
+		pDC->SetBkColor(RGB(192,192,192));//ZDO
 		strToShow = ourObjName;//ZDO
 		break;
 
@@ -751,6 +752,7 @@ void CDrawRect::Draw(CDC* pDC)
 
 	case ellipse:
 		pDC->Ellipse(rect);
+		pDC->SetBkColor(RGB(192,192,192));//ZDO
 		strToShow = ourObjName;//ZDO
 		break;
 
@@ -786,7 +788,9 @@ void CDrawRect::Draw(CDC* pDC)
 	pDC->SelectObject(pOldBrush);
 	pDC->SelectObject(pOldPen);
 
+
 	pDC->TextOut(textX,textY,strToShow);//ZDO
+	pDC->SetBkColor(RGB(255,255,255));//ZDO
 }
 
 
